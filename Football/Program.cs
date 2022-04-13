@@ -27,7 +27,12 @@ builder.Services.AddAuthentication()
     {
         options.AppId = builder.Configuration.GetValue<string>("Facebook:AppId");
         options.AppSecret = builder.Configuration.GetValue<string>("Facebook:AppSecret");
-    });
+    })
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration.GetValue<string>("Google:ClientId");
+        options.ClientSecret = builder.Configuration.GetValue<string>("Google:ClientSecret");
+    }); 
 
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
