@@ -91,10 +91,12 @@
         }
         public async Task<IActionResult> CreateRole()
         {
-            await roleManager.CreateAsync(new IdentityRole()
-            {
-                Name = "HouseKeeper"
-            });
+            //await roleManager.CreateAsync(new IdentityRole()
+            //{
+            //    Name = "Manager"
+            //    //Name = "Administrator"
+            //    //Name = "HouseKeeper"
+            //});
 
             return Ok();
         }
