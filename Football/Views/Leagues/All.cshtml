@@ -1,0 +1,23 @@
+﻿@model IEnumerable<LeagueListingViewModel>
+
+@{
+    ViewData["Title"] = "All Leagues";
+}
+
+<div class="row">
+
+    @foreach (var league in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img src="@league.Image" alt="@league.Name">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center">@league.Name</h5>
+                    <br />
+                    <a asp-controller="Leagues" asp-action="Details" asp-route-id=@league.Id class="btn btn-primary">Виж повече</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
