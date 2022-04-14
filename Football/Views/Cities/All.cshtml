@@ -1,0 +1,22 @@
+﻿@model IEnumerable<CityListingViewModel>
+
+<div class="row">
+    @foreach (var city in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img src="@city.Image" alt="@city.Name @city.PostCode">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center">@city.Name  @city.PostCode</h5>
+                    <br />
+                    <a asp-controller="Cities" asp-action="Details" asp-route-id=@city.Id class="btn btn-primary">Виж повече</a>
+                    @*@if (ViewBag.AllowCityEdit == true || User.IsAdmin())
+                    {
+                        <a asp-controller="Cities" asp-action="Edit" asp-route-id="@city.Id" class="btn btn-warning">Edit</a>
+                        <a asp-controller="Cities" asp-action="Delete" asp-route-id="@city.Id" class="btn btn-danger">Delete</a>
+                    }*@
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Football.Infrastructure.Migrations
 {
     [DbContext(typeof(FootballDbContext))]
-    [Migration("20220414074232_TeamImage")]
-    partial class TeamImage
+    [Migration("20220414092210_TeamCityImage")]
+    partial class TeamCityImage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,7 +100,7 @@ namespace Football.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -553,7 +553,7 @@ namespace Football.Infrastructure.Migrations
             modelBuilder.Entity("Football.Infrastructure.Data.Models.TeamCity", b =>
                 {
                     b.HasOne("Football.Infrastructure.Data.Models.City", "City")
-                        .WithMany()
+                        .WithMany("TeamCities")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -618,6 +618,11 @@ namespace Football.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Football.Infrastructure.Data.Models.City", b =>
+                {
+                    b.Navigation("TeamCities");
                 });
 
             modelBuilder.Entity("Football.Infrastructure.Data.Models.Player", b =>

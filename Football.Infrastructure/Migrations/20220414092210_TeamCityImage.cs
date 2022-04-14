@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Football.Infrastructure.Migrations
 {
-    public partial class NewBegin : Migration
+    public partial class TeamCityImage : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,8 +28,6 @@ namespace Football.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -57,7 +55,7 @@ namespace Football.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", maxLength: 36, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     PostCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Desctription = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -258,7 +256,7 @@ namespace Football.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", maxLength: 36, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     WebSite = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     LogoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HomeKit = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),

@@ -98,7 +98,7 @@ namespace Football.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -309,7 +309,7 @@ namespace Football.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -551,7 +551,7 @@ namespace Football.Infrastructure.Migrations
             modelBuilder.Entity("Football.Infrastructure.Data.Models.TeamCity", b =>
                 {
                     b.HasOne("Football.Infrastructure.Data.Models.City", "City")
-                        .WithMany()
+                        .WithMany("TeamCities")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -616,6 +616,11 @@ namespace Football.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Football.Infrastructure.Data.Models.City", b =>
+                {
+                    b.Navigation("TeamCities");
                 });
 
             modelBuilder.Entity("Football.Infrastructure.Data.Models.Player", b =>
