@@ -2,6 +2,7 @@
 {
     using Football.Core.Contracts;
     using Football.Infrastructure.Data;
+    using Football.Infrastructure.Data.Models;
     using Football.Infrastructure.Repositories;
     using Football.Services;
     using Microsoft.AspNetCore.Builder;
@@ -17,6 +18,7 @@
 
             //data.Database.Migrate();
 
+            SeedPosition(data);
 
             return services;
         }
@@ -38,6 +40,32 @@
 
 
             return services;
+        }
+
+        private static void SeedPosition(FootballDbContext data)
+        {
+            if (data.Positions.Any())
+            {
+                return;
+            }
+
+            //data.Positions.AddRange(new[]
+            //{
+            //    new Position { Name = "Goalkeeper"},
+            //    new Position { Name = "Defender - Centre-back"},
+            //    new Position { Name = "Defender - Sweeper"},
+            //    new Position { Name = "Defender - Full-back"},
+            //    new Position { Name = "Defender - Wing-back"},
+            //    new Position{ Name = "Midfielder - Central"},
+            //    new Position{ Name = "Midfielder - Defensive"},
+            //    new Position{ Name = "Midfielder - Attacking"},
+            //    new Position{ Name = "Midfielder - Wide"},
+            //    new Position { Name = "Forward - Second striker"},
+            //    new Position { Name = "Forward - Centre forward"},
+            //    new Position { Name = "Forward - Winger"},
+            //});
+
+            //data.SaveChanges();
         }
     }
 }

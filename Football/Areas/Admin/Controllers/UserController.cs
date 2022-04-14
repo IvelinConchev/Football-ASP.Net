@@ -46,7 +46,7 @@
             var model = new UserRolesViewModel()
             {
                 UserId = user.Id,
-                Name = $"{user.FirstName} {user.LastName}"
+               // Name = $"{user.FirstName} {user.LastName}"
             };
 
             ViewBag.RoleItems = roleManager.Roles

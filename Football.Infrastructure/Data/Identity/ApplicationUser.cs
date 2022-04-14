@@ -7,10 +7,10 @@
 
     public class ApplicationUser : IdentityUser
     {
-        [StringLength(ApplicationUserFirstNameMaxLength)]
-        public string? FirstName { get; set; }
+        //[StringLength(ApplicationUserFirstNameMaxLength)]
+        //public string? FirstName { get; set; }
 
-        [StringLength(ApplicationUserLastNameMaxLength)]
-        public string? LastName { get; set; }
+        //[StringLength(ApplicationUserLastNameMaxLength)]
+        //public string? LastName { get; set; }
     }
 }
