@@ -55,10 +55,10 @@
         [ForeignKey(nameof(PositionId))]
         public Position Position { get; set; }
 
-        public Guid ManagerId { get; set; }
+       // public Guid ManagerId { get; set; }
 
-        [ForeignKey(nameof(ManagerId))]
-        public Manager Manager { get; set; }
+        //[ForeignKey(nameof(ManagerId))]
+       // public Manager Manager { get; set; }
 
         public IList<Team> Teams { get; set; } = new List<Team>();
     }
