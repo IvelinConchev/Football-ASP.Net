@@ -1,96 +1,220 @@
 ﻿namespace Football.Controllers
 {
-    using Football.Infrastructure.Data;
-    using Football.Infrastructure.Data.Models;
-    using Football.Models.Players;
+    using Football.Core.Contracts;
+    using Football.Core.Models.Players;
+    using Football.Extensions;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class PlayersController : Controller
     {
-        private readonly FootballDbContext data;
+        private readonly IPlayerService players;
+        private readonly IManagerService managers;
 
-        public PlayersController(FootballDbContext _data)
+        private readonly IWebHostEnvironment webHostEnvironment;
+
+        public PlayersController(
+            IPlayerService _players,
+            IManagerService _managers,
+            IWebHostEnvironment _webHostEnvironment
+            )
         {
-            this.data = _data;
+            this.players = _players;
+            this.managers = _managers;
+            webHostEnvironment = _webHostEnvironment;
         }
 
-        public IActionResult Add() => View(new AddPlayerFormModel
+        public IActionResult All([FromQuery]
+            AllPlayersQueryModel query)
         {
-            Positions = this.GetPlayerPositions()
-        });
+            var queryResult = this.players.All(
+                query.Team,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                AllPlayersQueryModel.PlayersPerPage);
 
-        public IActionResult All()
+            var playerTeams = this.players.AllTeams();
+
+            query.Teams = playerTeams;
+            query.TotalPlayers = queryResult.TotalPlayers;
+            query.Players = queryResult.Players;
+
+            return View(query);
+        }
+
+        [Authorize]
+
+        public IActionResult Mine()
         {
-            var players = this.data
-                .Players
-                .OrderByDescending(p => p.Id)
-                .Select(p => new PlayerListingViewModel
-                {
-                    Id = p.Id,
-                    FirstName = p.FirstName,
-                    MiddleName = p.MiddleName,
-                    LastName = p.LastName,
-                    Team = p.Team,
-                    ImageUrl = p.ImageUrl,
-                    Age = p.Age,
-                    Nationality = p.Nationality,
-                    Position = p.Position.Name
-                })
-                .ToList();
+            var myPlayers = this.players.ByUser(this.User.Id());
 
-            return View(players);
+            return View(myPlayers);
+        }
+
+        [Authorize]
+
+        public IActionResult Add()
+        {
+            //TODO
+            //if (!this.managers.IsManager(this.User.Id()))
+            //{
+            //    return RedirectToAction(nameof(ManagersController.Become), "Managers");
+            //}
+
+            return View(new PlayerFormModel
+            {
+                Positions = this.players.AllPositions()
+            });
         }
 
         [HttpPost]
-        public IActionResult Add(AddPlayerFormModel player)
+        [Authorize]
+
+        public IActionResult Add(PlayerFormModel player)
         {
-            if (!this.data.Positions.Any(p => p.Id == player.PositionId))
+            var managerId = this.managers.IdByUser(this.User.Id());
+
+            if (managerId.Equals(Guid.Empty))
             {
-                this.ModelState.AddModelError(nameof(player.PositionId), "Position does not exist");
+                return RedirectToAction(nameof(ManagersController.Become), "Managers");
+            }
+
+            if (!this.players.PositionExists(player.PositionId))
+            {
+                this.ModelState.AddModelError(nameof(player.PositionId), "Position does not exist.");
             }
 
             if (ModelState.IsValid)
             {
-                player.Positions = this.GetPlayerPositions();
+                player.Positions = this.players.AllPositions();
 
                 return View(player);
             }
 
-            var playerData = new Player
+            string stringFileName = UploadFile(player);
+
+            this.players.Create(
+                player.FirstName,
+                player.MiddleName,
+                player.LastName,
+                player.Team,
+                player.Age,
+                player.Weight,
+                player.Height,
+                stringFileName,
+                player.Goal,
+                player.ShirtNumber,
+                player.Nationality,
+                player.Description,
+                player.PositionId,
+                managerId);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [Authorize]
+        public IActionResult Edit(Guid id)
+        {
+            var userId = this.User.Id();
+
+            if (!this.managers.IsManager(userId) && !User.IsAdmin())
+            {
+                return RedirectToAction(nameof(ManagersController.Become), "Managers");
+            }
+
+            var player = this.players.Details(id);
+
+            if (player.UserId != userId && !User.IsAdmin())
+            {
+                return Unauthorized();
+            }
+
+            return View(new PlayerFormModel
             {
                 FirstName = player.FirstName,
                 MiddleName = player.MiddleName,
                 LastName = player.LastName,
                 Team = player.Team,
+                Age = player.Age,
                 Weight = player.Weight,
                 Height = player.Height,
+                //Image = player.Image,
                 Goal = player.Goal,
-                Age = player.Age,
-                ImageUrl = player.ImageUrl,
-                Nationality = player.Nationality,
                 ShirtNumber = player.ShirtNumber,
+                Nationality = player.Nationality,
                 Description = player.Description,
                 PositionId = player.PositionId,
-            };
+                Positions = this.players.AllPositions()
+            });
+        }
 
-            this.data.Players.Add(playerData);
+        [HttpPost]
+        [Authorize]
 
-            this.data.SaveChanges();
+        public IActionResult Edit(Guid id, PlayerFormModel player)
+        {
+            var managerId = this.managers.IdByUser(this.User.Id());
 
-            //return RedirectToAction("Index", "Home");
+            string stringFileName = UploadFile(player);
+
+            if (managerId.Equals(Guid.Empty) && !User.IsAdmin())
+            {
+                return RedirectToAction(nameof(ManagersController.Become), "Managers");
+            }
+
+            if (!this.players.PositionExists(player.PositionId))
+            {
+                this.ModelState.AddModelError(nameof(player.PositionId), "Position does not exist.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                player.Positions = this.players.AllPositions();
+
+                return View(player);
+            }
+
+            if (!this.players.IsByManager(id, managerId) && !User.IsAdmin())
+            {
+                return BadRequest();
+            }
+
+            this.players.Edit(
+                id,
+                player.FirstName,
+                player.MiddleName,
+                player.LastName,
+                player.Team,
+                player.Age,
+                player.Weight,
+                player.Height,
+                stringFileName,
+                player.Goal,
+                player.ShirtNumber,
+                player.Nationality,
+                player.Description,
+                player.PositionId);
 
             return RedirectToAction(nameof(All));
         }
 
-        private IEnumerable<PlayerPositionViewModel> GetPlayerPositions()
-       => this.data
-            .Positions
-            .OrderBy(p => p.Name)
-            .Select(p => new PlayerPositionViewModel
+        private string UploadFile(PlayerFormModel model)
+        {
+            string fileName = null;
+            if (model.Image != null)
             {
-                Id = p.Id,
-                Name = p.Name
-            })
-            .ToList();
+                string uploadDir = Path.Combine(webHostEnvironment.WebRootPath, "img");
+                fileName = Guid.NewGuid().ToString() + "-" + model.Image.FileName;
+                string filePath = Path.Combine(uploadDir, fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Image.CopyTo(fileStream);
+                }
+            }
+
+            return fileName;
+        }
     }
 }

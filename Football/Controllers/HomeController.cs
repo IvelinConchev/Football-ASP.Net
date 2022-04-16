@@ -1,11 +1,11 @@
 ﻿namespace Football.Controllers
 {
+    using System.Diagnostics;
     using Football.Core.Constants;
     using Football.Infrastructure.Data;
     using Football.Models;
-    using Football.Models.Players;
+    using Football.Models.Home;
     using Microsoft.AspNetCore.Mvc;
-    using System.Diagnostics;
     public class HomeController : BaseController
     {
         private readonly FootballDbContext data;
@@ -25,17 +25,19 @@
 
         public IActionResult Index()
         {
+            var totalPlayers = this.data.Players.Count();
+
             var players = this.data
                 .Players
                 .OrderByDescending(p => p.Id)
-                .Select(p => new PlayerListingViewModel
+                .Select(p => new PlayerIndexViewModel
                 {
                     Id = p.Id,
                     FirstName = p.FirstName,
                     MiddleName = p.MiddleName,
                     LastName = p.LastName,
                     Team = p.Team,
-                    ImageUrl = p.ImageUrl,
+                    Image = p.Image,
                     Age = p.Age,
                     Nationality = p.Nationality,
                     Position = p.Position.Name
@@ -46,14 +48,17 @@
 
             ViewData[MessageConstant.SuccessMessage] = "Браво";
 
-            //return View();
-            return View(players);
+            return View(new IndexViewModel
+            {
+                TotalPlayers = totalPlayers,
+                Players = players
+            });
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
