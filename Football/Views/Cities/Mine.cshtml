@@ -1,0 +1,13 @@
+﻿@model IEnumerable<CityServiceModel>
+
+@{
+    ViewBag.Title = "My cities";
+    ViewBag.AllowCityEdit = true;
+}
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">You do not have any cities yet!</h2>
+}
+
+ <partial name="_CitiesPartial" model="@Model" />

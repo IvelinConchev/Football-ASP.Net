@@ -1,6 +1,7 @@
 ﻿namespace Football.Extensions
 {
     using Football.Core.Contracts;
+    using Football.Core.Services.Cities;
     using Football.Core.Services.Managers;
     using Football.Core.Services.Players;
     using Football.Core.Services.Positions;
@@ -35,6 +36,7 @@
             services.AddScoped<IPlayerService, PlayerService>();
             services.AddScoped<IPositionService, PositionService>();
             services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<ICityService, CityService>();
 
             return services;
         }

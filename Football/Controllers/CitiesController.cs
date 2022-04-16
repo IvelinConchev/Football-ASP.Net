@@ -1,82 +1,202 @@
 ﻿namespace Football.Controllers
 {
-    using Football.Infrastructure.Data;
-    using Football.Infrastructure.Data.Models;
-    using Football.Models.Cities;
+    using Football.Core.Contracts;
+    using Football.Core.Models.Cities;
+    using Football.Extensions;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class CitiesController : Controller
     {
-        private readonly FootballDbContext data;
+        private readonly IManagerService managers;
+        private readonly ICityService cities;
 
-        public CitiesController(FootballDbContext _data)
+        private readonly IWebHostEnvironment webHostEnvironment;
+
+        public CitiesController(
+            IManagerService _managers,
+            ICityService _cities,
+            IWebHostEnvironment _webHostEnvironment)
         {
-            this.data = _data;
+            this.managers = _managers;
+            this.cities = _cities;
+            this.webHostEnvironment = _webHostEnvironment;
         }
 
-        public IActionResult Add() => View(new AddCityFormModel
+        public IActionResult All([FromQuery]
+        AllCityQueryModel query)
         {
-            Teams = this.GetCityTeams()
-        });
+            var queryResult = this.cities.All(
+                query.Team,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                AllCityQueryModel.CityPerPage);
 
-        public IActionResult All()
-        {
-            var cities = data
-                .Cities
-                .OrderByDescending(c => c.Id)
-                .Select(c => new CityListingViewModel
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    PostCode = c.PostCode,
-                    Image = c.Image,
-                    Desctription = c.Desctription,
-                    //Team = c.Name
-                })
-                .ToList();
 
-            return View(cities);
+            var citiesTeam = this.cities.AllTeams();
+
+            query.Teams = citiesTeam;
+            query.TotalCities = queryResult.TotalCities;
+            query.Cities = queryResult.Cities;
+
+            return View(query);
         }
+
+        [Authorize]
+
+        public IActionResult Mine()
+        {
+            var myCities = this.cities.ByUser(this.User.Id());
+
+            return View(myCities);
+        }
+
+        [Authorize]
+
+        public IActionResult Add()
+        {
+            if (!this.managers.IsManager(this.User.Id()))
+            {
+                return RedirectToAction(nameof(ManagersController.Become),
+                    "Managers");
+            }
+            return View(new CityFormModel
+            {
+                Teams = this.cities.AllCities()
+            });
+        }
+
 
         [HttpPost]
+        [Authorize]
 
-        public IActionResult Add(AddCityFormModel city)
+        public IActionResult Add(CityFormModel city)
         {
-            if (!this.data.Teams.Any(c => c.Id == city.TeamId))
+            var managerId = this.managers.IdByUser(this.User.Id());
+
+            if (managerId.Equals(Guid.Empty))
             {
-                this.ModelState.AddModelError(nameof(city.TeamId), "Team does not exist.");
+                return RedirectToAction(nameof(ManagersController.Become), "Managers");
+            }
+
+            if (!this.cities.TeamExists(city.TeamId))
+            {
+                this.ModelState.AddModelError(nameof(city.TeamId),
+                    "City does not exist.");
             }
 
             if (ModelState.IsValid)
             {
-                city.Teams = GetCityTeams();
+                city.Teams = this.cities.AllCities();
+
+                return View(city);
             }
 
-            var cityData = new City
+            string stringFileName = UploadFile(city);
+
+            this.cities.Create(
+                city.Name,
+                city.PostCode,
+                stringFileName,
+                city.Description,
+                city.TeamId);
+
+            return RedirectToAction(nameof(All));
+
+        }
+
+        [Authorize]
+
+        public IActionResult Edit(Guid id)
+        {
+            var userId = this.User.Id();
+
+            if (!this.managers.IsManager(userId) && !User.IsAdmin())
+            {
+                return RedirectToAction(nameof(ManagersController.Become),
+                    "Managers");
+            }
+
+            var city = this.cities.Details(id);
+
+            if (city.UserId != userId)
+            {
+                return Unauthorized();
+            }
+
+            return View(new CityFormModel
             {
                 Name = city.Name,
-                Image = city.Image,
                 PostCode = city.PostCode,
-                Desctription = city.Description,
-               //TeamCities = city.Teams.
-            };
+                //Image = city.Image,
+                Description = city.Description,
+                TeamId = city.TeamId,
+                Teams = this.cities.AllCities(),
+            });
+        }
 
-            this.data.Cities.Add(cityData);
+        [HttpPost]
+        [Authorize]
 
-            this.data.SaveChanges();
+        public IActionResult Edit(Guid id, CityFormModel city)
+        {
+            var managerId = this.managers.IdByUser(
+                this.User.Id());
+
+            string strinfFileName = UploadFile(city);
+
+            if (managerId.Equals(Guid.Empty) && !User.IsAdmin())
+            {
+                return RedirectToAction(nameof(ManagersController.Become),
+                    "Managers");
+            }
+
+            if (!this.cities.TeamExists(city.TeamId))
+            {
+                this.ModelState.AddModelError(nameof(city.TeamId),
+                    "Team does not exist.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                city.Teams = this.cities.AllCities();
+
+                return View(city);
+            }
+
+            if (!this.cities.IsByManager(id, managerId) && !User.IsAdmin())
+            {
+                return BadRequest();
+            }
+
+            this.cities.Edit(
+                id,
+                city.Name,
+                city.PostCode,
+                strinfFileName,
+                city.Description,
+                city.TeamId);
 
             return RedirectToAction(nameof(All));
         }
-
-        private IEnumerable<CityTeamsViewModel> GetCityTeams()
-            => this.data
-            .Teams
-            .OrderBy(t => t.Name)
-            .Select(t => new CityTeamsViewModel
+        private string UploadFile(CityFormModel model)
+        {
+            string fileName = null;
+            if (model.Image != null)
             {
-                Id = t.Id,
-                Name = t.Name,
-            })
-            .ToList();
+                string uploadDir = Path.Combine(webHostEnvironment.WebRootPath, "img");
+                fileName = Guid.NewGuid().ToString() + "-" + model.Image.FileName;
+                string filePath = Path.Combine(uploadDir, fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Image.CopyTo(fileStream);
+                }
+            }
+
+            return fileName;
+        }
     }
 }
+
