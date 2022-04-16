@@ -1,0 +1,13 @@
+﻿@model IEnumerable<LeagueServiceModel>
+
+@{
+    ViewBag.Title = "My leagues";
+    ViewBag.AllowLeagueEdit = true;
+}
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">You do not have any leagues yet!</h2>
+}
+
+ <partial name="_LeaguesPartial" model="@Model" />

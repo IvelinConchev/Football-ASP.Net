@@ -2,12 +2,12 @@
 {
     using Football.Core.Contracts;
     using Football.Core.Services.Cities;
+    using Football.Core.Services.Leagues;
     using Football.Core.Services.Managers;
     using Football.Core.Services.Players;
     using Football.Core.Services.Positions;
     using Football.Core.Services.Teams;
     using Football.Infrastructure.Data;
-    using Football.Infrastructure.Data.Models;
     using Football.Infrastructure.Repositories;
     using Football.Services;
     using Microsoft.AspNetCore.Builder;
@@ -37,6 +37,7 @@
             services.AddScoped<IPositionService, PositionService>();
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<ICityService, CityService>();
+            services.AddScoped<ILeagueService, LeagueService>();
 
             return services;
         }
