@@ -3,6 +3,7 @@
     using Football.Core.Contracts;
     using Football.Core.Services.Managers;
     using Football.Core.Services.Players;
+    using Football.Core.Services.Positions;
     using Football.Infrastructure.Data;
     using Football.Infrastructure.Data.Models;
     using Football.Infrastructure.Repositories;
@@ -31,6 +32,7 @@
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IManagerService, ManagerService>();
             services.AddScoped<IPlayerService, PlayerService>();
+            services.AddScoped<IPositionService, PositionService>();
 
             return services;
         }
