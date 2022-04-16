@@ -31,6 +31,6 @@
         public int Win { get; set; }
 
         public int Defeats { get; set; }
-        public string? Player { get; set; }
+        public string Player { get; set; }
     }
 }
