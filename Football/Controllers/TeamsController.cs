@@ -132,7 +132,7 @@
 
             var team = this.teams.Details(id);
 
-            if (team.UserId != userId)
+            if (team.UserId != userId && !User.IsAdmin())
             {
                 return Unauthorized();
             }

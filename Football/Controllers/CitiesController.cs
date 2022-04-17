@@ -120,7 +120,7 @@
 
             var city = this.cities.Details(id);
 
-            if (city.UserId != userId)
+            if (city.UserId != userId && !User.IsAdmin())
             {
                 return Unauthorized();
             }

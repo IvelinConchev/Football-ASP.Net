@@ -57,10 +57,10 @@
         public IActionResult Add()
         {
             //TODO
-            //if (!this.managers.IsManager(this.User.Id()))
-            //{
-            //    return RedirectToAction(nameof(ManagersController.Become), "Managers");
-            //}
+            if (!this.managers.IsManager(this.User.Id()))
+            {
+                return RedirectToAction(nameof(ManagersController.Become), "Managers");
+            }
 
             return View(new PlayerFormModel
             {

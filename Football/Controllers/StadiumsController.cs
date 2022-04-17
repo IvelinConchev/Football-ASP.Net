@@ -115,7 +115,7 @@
 
             var stadium = this.stadiums.Details(id);
 
-            if (stadium.UserId != userId)
+            if (stadium.UserId != userId && !User.IsAdmin())
             {
                 return Unauthorized();
             }
