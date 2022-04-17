@@ -27,16 +27,16 @@
         AllCityQueryModel query)
         {
             var queryResult = this.cities.All(
-                query.Team,
+                query.Name,
                 query.SearchTerm,
                 query.Sorting,
                 query.CurrentPage,
                 AllCityQueryModel.CityPerPage);
 
 
-            var citiesTeam = this.cities.AllTeams();
+            var cityNames = this.cities.AllNames();
 
-            query.Teams = citiesTeam;
+            query.Names = cityNames;
             query.TotalCities = queryResult.TotalCities;
             query.Cities = queryResult.Cities;
 
@@ -63,7 +63,7 @@
             }
             return View(new CityFormModel
             {
-                Teams = this.cities.AllCities()
+                Teams = this.cities.AllTeams()
             });
         }
 
@@ -88,7 +88,7 @@
 
             if (ModelState.IsValid)
             {
-                city.Teams = this.cities.AllCities();
+                city.Teams = this.cities.AllTeams();
 
                 return View(city);
             }
@@ -132,7 +132,7 @@
                 //Image = city.Image,
                 Description = city.Description,
                 TeamId = city.TeamId,
-                Teams = this.cities.AllCities(),
+                Teams = this.cities.AllTeams(),
             });
         }
 
@@ -160,7 +160,7 @@
 
             if (ModelState.IsValid)
             {
-                city.Teams = this.cities.AllCities();
+                city.Teams = this.cities.AllTeams();
 
                 return View(city);
             }

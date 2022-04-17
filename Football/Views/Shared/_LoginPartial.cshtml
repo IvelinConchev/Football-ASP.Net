@@ -1,7 +1,11 @@
-﻿@using Football.Infrastructure.Data.Identity
+﻿@using Football.Core.Contracts
+@using Football.Infrastructure.Data.Identity
+@using Football.Infrastructure.Data.Models
 @using Microsoft.AspNetCore.Identity
+
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject IManagerService Managers
 
 @if (SignInManager.IsSignedIn(User))
 {

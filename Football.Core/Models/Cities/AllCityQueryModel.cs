@@ -7,7 +7,7 @@
     {
         public const int CityPerPage = 3;
 
-        public string Team { get; init; }
+        public string Name { get; init; }
 
 
         [Display(Name = "Search by text")]
@@ -19,7 +19,7 @@
 
         public int TotalCities { get; set; }
 
-        public IEnumerable<string> Teams { get; set; }
+        public IEnumerable<string> Names { get; set; }
 
         public IEnumerable<CityServiceModel> Cities { get; set; }
     }

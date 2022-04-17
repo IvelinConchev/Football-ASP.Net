@@ -17,7 +17,7 @@
         }
 
         public CityQueryServiceModel All
-            (string team,
+            (string name,
             string searchTerm,
             CitySorting sorting,
             int currentPage,
@@ -25,9 +25,9 @@
         {
             var citiesQuery = this.data.Cities.AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(team))
+            if (!string.IsNullOrWhiteSpace(name))
             {
-                citiesQuery = citiesQuery.Where(c => c.Name == team);
+                citiesQuery = citiesQuery.Where(c => c.Name == name);
             }
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
@@ -89,8 +89,6 @@
             return cityData.Id;
         }
 
-
-
         public bool Edit(Guid id, string name, string postCode, string image, string description, Guid teamId)
         {
             var cityData = this.data.Cities.Find(id);
@@ -109,13 +107,12 @@
             return true;
         }
 
+
         //TODO
-        //public ICollection<CityServiceModel> ByUser(string userId)
-        //=> GetCities(this.data
-        //    .Cities
-        //    .Select(t => t.TeamCities
-        //    .Select(tc => tc.Team)
-        //    .Where(x => x.Player.Manager.UserId == userId)).ToList();
+        public IEnumerable<CityServiceModel> ByUser(string userId)
+        => GetCities(this.data
+            .Cities
+            .Where(x => x.Name == userId)).ToList();
 
         //TODO
         public bool IsByManager(Guid cityId, Guid managerId)
@@ -123,50 +120,40 @@
             .Teams
             .Any(t => t.Id == cityId && t.Player.ManagerId == managerId);
 
+        private static IEnumerable<CityServiceModel> GetCities
+           (IQueryable<City> cityQuery)
+           => cityQuery
+           .Select(c => new CityServiceModel
+           {
+               Id = c.Id,
+               Name = c.Name,
+               PostCode = c.PostCode,
+               Image = c.Image,
+               Desctription = c.Desctription,
+           })
+           .ToList();
 
-        public IEnumerable<string> AllTeams()
-        => this.data
-            .Cities
-            .Select(t => t.Name)
-            .Distinct()
-            .OrderBy(t => t)
-            .ToList();
-        public IEnumerable<CityTeamsServiceModel> AllCities()
-        => this.data
+        public IEnumerable<CityTeamsServiceModel> AllTeams()
+            => this.data
             .Teams
             .Select(t => new CityTeamsServiceModel
             {
                 Id = t.Id,
-                Name = t.Name,
-            });
-
-        public bool TeamExists(Guid teamId)
-        => this.data
-            .Teams
-            .Any(t => t.Id == teamId);
-
-        public bool ManagersExist(Guid managerId)
-            => this.data
-            .Managers
-            .Any(m => m.Id == managerId);
-
-        private static IEnumerable<CityServiceModel> GetCities
-            (IQueryable<City> cityQuery)
-            => cityQuery
-            .Select(c => new CityServiceModel
-            {
-                Id = c.Id,
-                Name = c.Name,
-                PostCode = c.PostCode,
-                Image = c.Image,
-                Desctription = c.Desctription,
-                //TeamName = c.TeamC
+                Name = t.Name
             })
             .ToList();
 
-        IEnumerable<CityServiceModel> ICityService.ByUser(string userId)
-        {
-            throw new NotImplementedException();
-        }
+        public bool TeamExists(Guid teamId)
+            => this.data
+            .Teams
+            .Any(t => t.Id == teamId);
+
+        public IEnumerable<string> AllNames()
+            => this.data
+            .Cities
+            .Select(c => c.Name)
+            .Distinct()
+            .OrderBy(n => n)
+            .ToList();
     }
 }

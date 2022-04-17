@@ -34,9 +34,9 @@
 
         bool IsByManager(Guid cityId, Guid managerId);
 
-        IEnumerable<string> AllTeams();
+        IEnumerable<string> AllNames();
 
-        IEnumerable<CityTeamsServiceModel> AllCities();
+        IEnumerable<CityTeamsServiceModel> AllTeams();
 
         bool TeamExists(Guid teamId);
     }
