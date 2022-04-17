@@ -6,6 +6,7 @@
     using Football.Core.Services.Managers;
     using Football.Core.Services.Players;
     using Football.Core.Services.Positions;
+    using Football.Core.Services.Stadiums;
     using Football.Core.Services.Teams;
     using Football.Infrastructure.Data;
     using Football.Infrastructure.Repositories;
@@ -38,6 +39,7 @@
             services.AddScoped<ITeamService, TeamService>();
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<ILeagueService, LeagueService>();
+            services.AddScoped<IStadiumService, StadiumService>();
 
             return services;
         }

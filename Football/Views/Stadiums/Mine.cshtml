@@ -1,0 +1,13 @@
+﻿@model IEnumerable<StadiumServiceModel>
+
+@{
+    ViewBag.Title = "My Stadiums";
+    ViewBag.AllowStadiumEdit = true;
+}
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">You do not have any stadiums yet!</h2>
+}
+
+ <partial name="_StadiumsPartial" model="@Model" />

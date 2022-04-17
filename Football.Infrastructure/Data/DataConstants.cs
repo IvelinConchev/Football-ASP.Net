@@ -46,9 +46,11 @@
         {
             public const int StadiumNameMinLength = 3;
             public const int StadiumNameMaxLength = 100;
-            public const int StadiumAddressMinLength = 30;
+            public const int StadiumAddressMinLength = 3;
             public const int StadiumAddressMaxLength = 100;
             public const int StadiumDescriptionMinLength = 2;
+            public const int StadiumCapacityMinLength = 50;
+            public const int StadiumCapacityMaxLength = 200000;
         }
 
         public class Player
