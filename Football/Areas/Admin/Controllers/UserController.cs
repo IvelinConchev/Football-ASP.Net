@@ -62,6 +62,23 @@
             return View(model);
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> Roles(UserRolesViewModel model)
+        {
+            var user = await service.GetUserById(model.UserId);
+            var userRoles = await userManager.GetRolesAsync(user);
+            await userManager.RemoveFromRolesAsync(user, userRoles);
+
+            if (model.RoleNames?.Length > 0)
+            {
+                await userManager.AddToRolesAsync(user, model.RoleNames);
+
+            }
+
+            return RedirectToAction(nameof(ManageUsers));
+        }
+
         //GETattrubute
         public async Task<IActionResult> Edit(string id)
         {
