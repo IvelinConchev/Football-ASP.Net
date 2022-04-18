@@ -7,6 +7,7 @@
     using Football.Core.Services.Players;
     using Football.Core.Services.Positions;
     using Football.Core.Services.Stadiums;
+    using Football.Core.Services.Statistics;
     using Football.Core.Services.Teams;
     using Football.Infrastructure.Data;
     using Football.Infrastructure.Repositories;
@@ -31,6 +32,7 @@
 
         public static IServiceCollection ApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped<IFootballDbRepository, FootballDbRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IManagerService, ManagerService>();
@@ -40,6 +42,12 @@
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<ILeagueService, LeagueService>();
             services.AddScoped<IStadiumService, StadiumService>();
+
+
+            //services.ConfigureApplicationCookie(option =>
+            //{
+            //    option.LoginPath = $"/Admin/Home/Index";
+            //});
 
             return services;
         }

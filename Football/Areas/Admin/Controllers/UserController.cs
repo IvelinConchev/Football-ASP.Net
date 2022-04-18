@@ -54,7 +54,7 @@
                  .Select(r => new SelectListItem()
                  {
                      Text = r.Name,
-                     Value = r.Id,
+                     Value = r.Name,
                      Selected = userManager.IsInRoleAsync(user, r.Name).Result
                  })
                  .ToList();

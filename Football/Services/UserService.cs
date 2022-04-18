@@ -29,8 +29,8 @@
             return new UserEditViewModel()
             {
                 Id = user.Id,
-                //FirstName = user.FirstName,
-                //LastName = user.LastName
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
         }
 
@@ -41,7 +41,7 @@
                 {
                     Email = u.Email,
                     Id = u.Id,
-                    //Name = $"{u.FirstName} {u.LastName}"
+                    Name = $"{u.FirstName} {u.LastName}"
                 })
                 .ToListAsync();
         }
@@ -53,8 +53,8 @@
             //try catch
             if (user != null)
             {
-                //user.FirstName = model.FirstName;
-                //user.LastName = model.LastName;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
                 await repo.SaveChangesAsync();
 
                 result = true;
