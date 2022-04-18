@@ -2,6 +2,7 @@
 {
     using System.Diagnostics;
     using Football.Core.Constants;
+    using Football.Core.Contracts;
     using Football.Infrastructure.Data;
     using Football.Models;
     using Football.Models.Home;
@@ -9,19 +10,17 @@
     public class HomeController : BaseController
     {
         private readonly FootballDbContext data;
+        private readonly IStatisticsService statistics;
 
         private readonly ILogger<HomeController> _logger;
-        public HomeController(FootballDbContext _data, ILogger<HomeController> logger)
+        public HomeController(FootballDbContext _data,
+            ILogger<HomeController> logger,
+            IStatisticsService _statistics)
         {
             this.data = _data;
             _logger = logger;
+            this.statistics = _statistics;
         }
-
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
 
         public IActionResult Index()
         {
@@ -45,20 +44,22 @@
                 .Take(3)
                 .ToList();
 
+            var totalStatistics = this.statistics.Total();
 
             ViewData[MessageConstant.SuccessMessage] = "Браво";
 
             return View(new IndexViewModel
             {
-                TotalPlayers = totalPlayers,
+                TotalPlayers = totalStatistics.TotalPlayers,
+                TotalUsers = totalStatistics.TotalUsers,
                 Players = players
             });
         }
 
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
