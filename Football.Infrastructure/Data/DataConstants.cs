@@ -98,7 +98,7 @@
         public class Roles
         {
             public const string RoleNameAdministrator = "Administrator";
-            public const string RoleNameManagers = "Managers";
+            public const string RoleNameManager = "Manager";
             public const string RoleNameUser = "User";
         }
     }

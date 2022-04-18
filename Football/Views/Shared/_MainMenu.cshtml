@@ -26,7 +26,8 @@
     </ul>
 </nav>
 
-        @if (SignInManager.IsSignedIn(User))
+       @* @if (SignInManager.IsSignedIn(User))*@
+       @if (User.IsInRole(DataConstants.Roles.RoleNameAdministrator) || User.IsInRole(DataConstants.Roles.RoleNameManager))
 {
     var userId = User.Id();
     var userIsManager = Managers.IsManager(userId);
@@ -56,8 +57,72 @@
             </li>
         </ul>
     </nav>
+      <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-    @if (userIsManager)
+                <li class="nav-item">
+                    <a href="/Players/Mine" class="nav-link active">
+                        <i class="fas fa-user"></i>
+                        <p>
+                            My Players
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item">
+                    <a href="/Teams/Mine" class="nav-link active">
+                        <i class="fas fa-user"></i>
+                        <p>
+                            My Teams
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item">
+                    <a href="/Cities/Mine" class="nav-link active">
+                        <i class="fas fa-user"></i>
+                        <p>
+                            My Cities
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item">
+                    <a href="/Leagues/Mine" class="nav-link active">
+                        <i class="fas fa-user"></i>
+                        <p>
+                            My Leagues
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item">
+                    <a href="/Stadiums/Mine" class="nav-link active">
+                        <i class="fas fa-user"></i>
+                        <p>
+                            My Stadiums
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+   @* if (User.IsInRole(DataConstants.Roles.RoleNameManagers))
     {
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -124,8 +189,8 @@
                 </li>
             </ul>
         </nav>
-    }
-    else if (userIsAdmin)
+    }*@
+  @*  else if (userIsAdmin)
     {
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -139,7 +204,7 @@
                     </a>
                 </li>
             </ul>
-        </nav>
+        </nav>*@
         @*<nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">

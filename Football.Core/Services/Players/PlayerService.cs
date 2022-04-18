@@ -85,6 +85,7 @@
                 ShirtNumber = p.ShirtNumber,
                 Nationality = p.Nationality,
                 Description = p.Description,
+                PositionId = p.PositionId,
                 PositionName = p.Position.Name,
                 UserId = p.Manager.UserId
             })

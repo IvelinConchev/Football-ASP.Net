@@ -72,6 +72,7 @@
                 Name = l.Name,
                 Image = l.Image,
                 Description = l.Description,
+                TeamId = l.TeamId,
                 TeamName = l.Team.Name,
                 //ManagerId = l,
                 //MangerName = l.Team.

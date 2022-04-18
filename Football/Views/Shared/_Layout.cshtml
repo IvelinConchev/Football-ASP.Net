@@ -23,22 +23,15 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                @*@if (User.IsInRole(DataConstants.Roles.RoleNameAdministrator))
-                {*@
+                @if (User.IsInRole(DataConstants.Roles.RoleNameAdministrator) || (User.IsInRole(DataConstants.Roles.RoleNameManager)))
+                {
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Positions" asp-action="Add">Add Position</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Add">Add Player</a>
                     </li>
-                @*}*@
-                @*<li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Positions" asp-action="Add">Add Position</a>
-                    </li>*@
-                @* <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Add">Add Player</a>
-                    </li>*@
-                <li class="nav-item">
+                      <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="All">All Players</a>
                 </li>
                 <li class="nav-item">
@@ -65,8 +58,33 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="All">All Stadiums</a>
                 </li>
+                }
+                else
+                {
+                @*<li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Positions" asp-action="Add">Add Position</a>
+                    </li>*@
+                @* <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Add">Add Player</a>
+                    </li>*@
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="All">All Players</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="All">All Teams</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="All">All Cities</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Leagues" asp-action="All">All Leagues</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="All">All Stadiums</a>
+                </li>
+                }
             </ul>
-
+            
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -112,12 +130,23 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                @*<li class="breadcrumb-item"><a href="#">Home</a></li>*@
                                 @* <li class="breadcrumb-item active">Starter Page</li>*@
-                                @*@if (User.IsInRole(DataConstants.Roles.RoleNameAdministrator))
-                                {*@
-                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="user" asp-action="Manageusers">Admin palnel</a>
-                                @*}*@
+                                @if (User.IsInRole(DataConstants.Roles.RoleNameAdministrator))
+                                {
+                                     <a class="nav-link text-dark" asp-area="Admin" asp-controller="home" asp-action="Index">Admin palnel</a>
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="user" asp-action="Manageusers">Admin Roles</a>
+                                }
+                                else if (User.IsInRole(DataConstants.Roles.RoleNameManager))
+                                 {
+                                    <a class="nav-link text-dark" asp-area="Manager" asp-controller="Home" asp-action="Index">Manager palnel</a>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">User</a>
+                </li>
+                                }
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->

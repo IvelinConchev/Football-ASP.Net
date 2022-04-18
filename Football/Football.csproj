@@ -27,4 +27,9 @@
     <ProjectReference Include="..\Football.Core\Football.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Manager\Data\" />
+    <Folder Include="Areas\Manager\Models\" />
+  </ItemGroup>
+
 </Project>

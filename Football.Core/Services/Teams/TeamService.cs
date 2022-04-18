@@ -79,6 +79,7 @@
                 LogoUrl = t.LogoUrl,
                 Win = t.Win,
                 NickName = t.NickName,
+                PlayerId = t.PlayerId,
                 PlayerName = t.Player.Team,
                 UserId = t.Player.Manager.UserId
             })
