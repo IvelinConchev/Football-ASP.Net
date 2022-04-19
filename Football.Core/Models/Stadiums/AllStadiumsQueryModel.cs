@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Football.Core.Services.Stadiums;
+    using Football.Core.Services.Stadiums.Models;
 
     public class AllStadiumsQueryModel
     {

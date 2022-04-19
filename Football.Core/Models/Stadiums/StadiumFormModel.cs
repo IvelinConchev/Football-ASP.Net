@@ -1,7 +1,7 @@
 ﻿namespace Football.Core.Models.Stadiums
 {
     using System.ComponentModel.DataAnnotations;
-    using Football.Core.Services.Stadiums;
+    using Football.Core.Services.Stadiums.Models;
     using Microsoft.AspNetCore.Http;
 
     using static Football.Infrastructure.Data.DataConstants.Stadium;

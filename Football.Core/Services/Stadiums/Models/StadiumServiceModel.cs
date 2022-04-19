@@ -1,4 +1,4 @@
-﻿namespace Football.Core.Services.Stadiums
+﻿namespace Football.Core.Services.Stadiums.Models
 {
     using System;
 
