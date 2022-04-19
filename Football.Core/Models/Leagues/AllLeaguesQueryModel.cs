@@ -1,11 +1,7 @@
 ﻿namespace Football.Core.Models.Leagues
 {
-    using Football.Core.Services.Leagues;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using Football.Core.Services.Leagues;
 
     public class AllLeaguesQueryModel
     {

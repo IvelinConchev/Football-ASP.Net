@@ -1,7 +1,8 @@
 ﻿namespace Football.Core.Models.Positions
 {
-    using Football.Core.Services.Positions;
     using System.ComponentModel.DataAnnotations;
+    using Football.Core.Services.Positions;
+
     using static Football.Infrastructure.Data.DataConstants.Position;
     public class PositionFormModel
     {

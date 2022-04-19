@@ -1,6 +1,6 @@
 ﻿namespace Football.Core.Models.Cities
 {
-    using Football.Core.Services.Cities;
+    using Football.Core.Services.Cities.Models;
     using System.ComponentModel.DataAnnotations;
 
     public class AllCityQueryModel

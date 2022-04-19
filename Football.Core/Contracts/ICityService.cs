@@ -3,8 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Football.Core.Models.Cities;
-    using Football.Core.Services.Cities;
-
+    using Football.Core.Services.Cities.Models;
     public interface ICityService
     {
         CityQueryServiceModel All(

@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using Football.Core.Services.Leagues;
     using Microsoft.AspNetCore.Http;
+
     using static Football.Infrastructure.Data.DataConstants.League;
     public class LeagueFormModel
     {

@@ -1,12 +1,12 @@
 ﻿namespace Football.Services
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Football.Core.Contracts;
     using Football.Core.Models;
     using Football.Infrastructure.Data.Identity;
     using Football.Infrastructure.Repositories;
     using Microsoft.EntityFrameworkCore;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     public class UserService : IUserService
     {

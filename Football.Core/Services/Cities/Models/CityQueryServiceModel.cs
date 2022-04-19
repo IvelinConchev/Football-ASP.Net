@@ -1,4 +1,4 @@
-﻿namespace Football.Core.Services.Cities
+﻿namespace Football.Core.Services.Cities.Models
 {
     using System.Collections.Generic;
 

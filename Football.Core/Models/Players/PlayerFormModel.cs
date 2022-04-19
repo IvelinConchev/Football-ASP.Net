@@ -1,10 +1,10 @@
 ﻿namespace Football.Core.Models.Players
 {
-    using Football.Core.Services.Players;
-    using Microsoft.AspNetCore.Http;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Football.Core.Services.Players;
+    using Microsoft.AspNetCore.Http;
 
     using static Football.Infrastructure.Data.DataConstants.Player;
 

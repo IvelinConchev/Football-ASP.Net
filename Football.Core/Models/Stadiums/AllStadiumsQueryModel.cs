@@ -1,8 +1,8 @@
 ﻿namespace Football.Core.Models.Stadiums
 {
-    using Football.Core.Services.Stadiums;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Football.Core.Services.Stadiums;
 
     public class AllStadiumsQueryModel
     {

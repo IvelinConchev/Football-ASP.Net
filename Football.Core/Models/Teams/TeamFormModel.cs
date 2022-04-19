@@ -1,10 +1,10 @@
 ﻿namespace Football.Core.Models.Teams
 {
-    using Football.Core.Services.Teams;
-    using Microsoft.AspNetCore.Http;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Football.Core.Services.Teams;
+    using Microsoft.AspNetCore.Http;
 
     using static Football.Infrastructure.Data.DataConstants.Team;
     public class TeamFormModel
