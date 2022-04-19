@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Football.Core.Services.Players;
+    using Football.Core.Services.Players.Models;
     using Microsoft.AspNetCore.Http;
 
     using static Football.Infrastructure.Data.DataConstants.Player;

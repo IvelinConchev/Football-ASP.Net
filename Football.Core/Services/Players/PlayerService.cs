@@ -5,6 +5,7 @@
     using System.Linq;
     using Football.Core.Contracts;
     using Football.Core.Models.Players;
+    using Football.Core.Services.Players.Models;
     using Football.Infrastructure.Data;
     using Football.Infrastructure.Data.Models;
 

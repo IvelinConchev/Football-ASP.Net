@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Football.Core.Services.Players;
+    using Football.Core.Services.Players.Models;
 
     public class AllPlayersQueryModel
     {

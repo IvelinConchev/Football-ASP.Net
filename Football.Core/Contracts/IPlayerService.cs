@@ -1,10 +1,9 @@
 ﻿namespace Football.Core.Contracts
 {
-    using Football.Core.Models.Players;
-    using Football.Core.Services.Players;
     using System;
     using System.Collections.Generic;
-
+    using Football.Core.Models.Players;
+    using Football.Core.Services.Players.Models;
     public interface IPlayerService
     {
         PlayerQueryServiceModel All(
