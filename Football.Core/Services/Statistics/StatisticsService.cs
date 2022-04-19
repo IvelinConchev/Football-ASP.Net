@@ -20,12 +20,14 @@
 
         public StatisticsServiceModel Total()
         {
-            var totalPlayers = this.data.Players.Count();
+            //var totalPlayers = this.data.Players.Count();
+            var totalTeams = this.data.Teams.Count();
             var totalUsers = this.data.Users.Count();
 
             return new StatisticsServiceModel
             {
-                TotalPlayers = totalPlayers,
+                //TotalPlayers = totalPlayers,
+                TotalTeams = totalTeams,
                 TotalUsers = totalUsers,
             };
         }

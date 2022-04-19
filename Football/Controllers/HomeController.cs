@@ -9,40 +9,26 @@
     using Microsoft.AspNetCore.Mvc;
     public class HomeController : BaseController
     {
-        private readonly FootballDbContext data;
+        private readonly ITeamService teams;
         private readonly IStatisticsService statistics;
 
         private readonly ILogger<HomeController> _logger;
-        public HomeController(FootballDbContext _data,
+        public HomeController(
+            ITeamService _teams,
             ILogger<HomeController> logger,
             IStatisticsService _statistics)
         {
-            this.data = _data;
+            this.teams = _teams;
             _logger = logger;
             this.statistics = _statistics;
         }
 
         public IActionResult Index()
         {
-            var totalPlayers = this.data.Players.Count();
+            //var totalPlayers = this.data.Players.Count();
 
-            var players = this.data
-                .Players
-                .OrderByDescending(p => p.Id)
-                .Select(p => new PlayerIndexViewModel
-                {
-                    Id = p.Id,
-                    FirstName = p.FirstName,
-                    MiddleName = p.MiddleName,
-                    LastName = p.LastName,
-                    Team = p.Team,
-                    Image = p.Image,
-                    Age = p.Age,
-                    Nationality = p.Nationality,
-                    Position = p.Position.Name
-                })
-                .Take(3)
-                .ToList();
+            var latestTeam = this.teams.Latest();
+
 
             var totalStatistics = this.statistics.Total();
 
@@ -50,9 +36,10 @@
 
             return View(new IndexViewModel
             {
-                TotalPlayers = totalStatistics.TotalPlayers,
+                //TotalPlayers = totalStatistics.TotalPlayers,
+                TotalTeams = totalStatistics.TotalTeams,
                 TotalUsers = totalStatistics.TotalUsers,
-                Players = players
+                Teams = latestTeam.ToList()
             });
         }
 

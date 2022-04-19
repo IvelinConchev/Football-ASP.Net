@@ -13,6 +13,8 @@
             int currentPage,
             int teamsPerPage);
 
+        IEnumerable<LatestTeamServiceModel> Latest();
+
         TeamDetailsServiceModel Details(Guid teamId);
 
         Guid Create(

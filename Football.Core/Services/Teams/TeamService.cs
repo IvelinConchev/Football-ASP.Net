@@ -60,6 +60,23 @@
             };
         }
 
+        public IEnumerable<LatestTeamServiceModel> Latest()
+        => this.data
+                .Teams
+                .OrderByDescending(p => p.Id)
+                .Select(p => new LatestTeamServiceModel
+                {
+                    Id = p.Id,
+                    Image = p.Image,
+                    Name = p.Name,
+                    NickName = p.NickName,
+                    Player = p.Player.Nationality,
+                    Champion = p.Champion,
+                    Cup = p.Cup
+                })
+                .Take(3)
+                .ToList();
+
         public TeamDetailsServiceModel Details(Guid id)
             => this.data
             .Teams
@@ -184,23 +201,24 @@
              .Select(t => new TeamServiceModel
              {
                  Id = t.Id,
-                  Name=t.Name,
-                  Address = t.Address,
-                  AwayKit = t.AwayKit,
-                  Champion = t.Champion,
-                  Cup = t.Cup,
-                  Defeats = t.Defeats,
-                  Description = t.Description,
-                  HeadCoach = t.HeadCoach,
-                  HomeKit = t.HomeKit,
-                  Image = t.Image,
-                  LogoUrl = t.LogoUrl,
-                  NickName = t.NickName,
-                  WebSite = t.WebSite,
-                  Win = t.Win,
-                  PlayerName = t.Player.FirstName
+                 Name = t.Name,
+                 Address = t.Address,
+                 AwayKit = t.AwayKit,
+                 Champion = t.Champion,
+                 Cup = t.Cup,
+                 Defeats = t.Defeats,
+                 Description = t.Description,
+                 HeadCoach = t.HeadCoach,
+                 HomeKit = t.HomeKit,
+                 Image = t.Image,
+                 LogoUrl = t.LogoUrl,
+                 NickName = t.NickName,
+                 WebSite = t.WebSite,
+                 Win = t.Win,
+                 PlayerName = t.Player.FirstName
              })
             .ToList();
+
 
     }
 }

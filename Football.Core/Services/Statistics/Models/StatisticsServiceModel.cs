@@ -2,7 +2,8 @@
 {
     public class StatisticsServiceModel
     {
-        public int TotalPlayers { get; init; }
+        //public int TotalPlayers { get; init; }
+        public int TotalTeams { get; init; }
 
         public int TotalUsers { get; init; }
 
