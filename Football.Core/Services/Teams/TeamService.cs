@@ -1,11 +1,12 @@
 ﻿namespace Football.Core.Services.Teams
 {
-    using Football.Core.Contracts;
     using System;
+    using Football.Core.Contracts;
     using System.Collections.Generic;
     using Football.Core.Models.Teams;
     using Football.Infrastructure.Data;
     using Football.Infrastructure.Data.Models;
+    using Football.Core.Services.Teams.Models;
 
     public class TeamService : ITeamService
     {

@@ -1,6 +1,7 @@
 ﻿namespace Football.Core.Services.Statistics
 {
     using Football.Core.Contracts;
+    using Football.Core.Services.Statistics.Models;
     using Football.Infrastructure.Data;
     using System;
     using System.Collections.Generic;

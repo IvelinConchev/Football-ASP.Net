@@ -2,7 +2,7 @@
 {
     using System;
     using Football.Core.Models.Teams;
-    using Football.Core.Services.Teams;
+    using Football.Core.Services.Teams.Models;
 
     public interface ITeamService
     {

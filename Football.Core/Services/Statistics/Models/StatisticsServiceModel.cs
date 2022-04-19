@@ -1,4 +1,4 @@
-﻿namespace Football.Core.Services.Statistics
+﻿namespace Football.Core.Services.Statistics.Models
 {
     public class StatisticsServiceModel
     {

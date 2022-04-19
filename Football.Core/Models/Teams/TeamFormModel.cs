@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Football.Core.Services.Teams;
+    using Football.Core.Services.Teams.Models;
     using Microsoft.AspNetCore.Http;
 
     using static Football.Infrastructure.Data.DataConstants.Team;

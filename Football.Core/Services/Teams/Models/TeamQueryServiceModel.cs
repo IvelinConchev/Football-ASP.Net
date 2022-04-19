@@ -1,4 +1,4 @@
-﻿namespace Football.Core.Services.Teams
+﻿namespace Football.Core.Services.Teams.Models
 {
     using System.Collections.Generic;
 
