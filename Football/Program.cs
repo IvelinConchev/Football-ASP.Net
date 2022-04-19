@@ -4,6 +4,7 @@ using Football.Infrastructure.Data;
 using Football.Infrastructure.Data.Identity;
 using Football.ModelBinders;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +33,7 @@ builder.Services.AddAuthentication()
     {
         options.ClientId = builder.Configuration.GetValue<string>("Google:ClientId");
         options.ClientSecret = builder.Configuration.GetValue<string>("Google:ClientSecret");
-    }); 
+    });
 
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
@@ -41,6 +42,13 @@ builder.Services.AddControllersWithViews()
         options.ModelBinderProviders.Insert(1, new DateTimeModelBinderProvider(FormatingConstant.NormalDateFormat));
         options.ModelBinderProviders.Insert(2, new DoubleModelBinderProvider());
     });
+
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+});
+
+builder.Services.AddMemoryCache();
 
 builder.Services.ApplicationServices();
 
