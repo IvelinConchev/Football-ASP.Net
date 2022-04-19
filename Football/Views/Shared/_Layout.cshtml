@@ -155,6 +155,12 @@
             <!-- /.content-header -->
             <!-- Main content -->
             <div class="content">
+                @if (TempData.ContainsKey(WebConstants.GlobalMessageKey))
+                {
+                    <div class="alert alert-success text-center" role="alert">
+                       @TempData[WebConstants.GlobalMessageKey]
+                    </div>
+                }
                 <div class="container-fluid">
                     @RenderBody()
                 </div><!-- /.container-fluid -->

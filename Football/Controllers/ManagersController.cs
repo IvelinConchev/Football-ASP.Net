@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static WebConstants;
     public class ManagersController : Controller
     {
         private readonly FootballDbContext data;
@@ -48,6 +49,8 @@
 
             this.data.Managers.Add(managerData);
             this.data.SaveChanges();
+
+            this.TempData[GlobalMessageKey] = "Thank you for becomming a manager!";
 
             return RedirectToAction("All", "Players");
         }

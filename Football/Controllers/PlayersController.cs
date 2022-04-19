@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static WebConstants;
     public class PlayersController : Controller
     {
         private readonly IPlayerService players;
@@ -110,6 +111,8 @@
                 player.PositionId,
                 managerId);
 
+            TempData[GlobalMessageKey] = "You Player was added successfully!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -195,6 +198,8 @@
                 player.Nationality,
                 player.Description,
                 player.PositionId);
+
+            TempData[GlobalMessageKey] = "You Player was saved successfully!";
 
             return RedirectToAction(nameof(All));
         }

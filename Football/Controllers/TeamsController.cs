@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static WebConstants;
     public class TeamsController : Controller
     {
         public readonly ITeamService teams;
@@ -115,6 +116,8 @@
                 team.PlayerId,
                 managerId);
 
+            TempData[GlobalMessageKey] = "You Team was added successfully!";
+
             return RedirectToAction(nameof(All));
         }
 
@@ -207,6 +210,8 @@
                 team.Win,
                 team.Defeats,
                 team.PlayerId);
+
+            TempData[GlobalMessageKey] = "You Team was saved successfully!";
 
             return RedirectToAction(nameof(All));
         }
