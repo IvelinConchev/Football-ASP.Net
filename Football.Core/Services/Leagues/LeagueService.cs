@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Football.Core.Contracts;
     using Football.Core.Models.Leagues;
+    using Football.Core.Services.Leagues.Models;
     using Football.Infrastructure.Data;
     using Football.Infrastructure.Data.Models;
 

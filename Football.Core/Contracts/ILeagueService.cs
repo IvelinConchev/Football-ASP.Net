@@ -3,6 +3,7 @@
     using System;
     using Football.Core.Models.Leagues;
     using Football.Core.Services.Leagues;
+    using Football.Core.Services.Leagues.Models;
 
     public interface ILeagueService
     {

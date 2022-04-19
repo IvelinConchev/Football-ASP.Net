@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Football.Core.Services.Leagues;
+    using Football.Core.Services.Leagues.Models;
 
     public class AllLeaguesQueryModel
     {

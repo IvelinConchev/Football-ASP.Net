@@ -1,4 +1,4 @@
-﻿namespace Football.Core.Services.Leagues
+﻿namespace Football.Core.Services.Leagues.Models
 {
     using System;
 
