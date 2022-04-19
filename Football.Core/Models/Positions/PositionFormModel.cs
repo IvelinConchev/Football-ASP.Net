@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Football.Core.Services.Positions;
-
+    using Football.Core.Services.Positions.Models;
     using static Football.Infrastructure.Data.DataConstants.Position;
     public class PositionFormModel
     {

@@ -1,6 +1,7 @@
 ﻿namespace Football.Core.Services.Positions
 {
     using Football.Core.Contracts;
+    using Football.Core.Services.Positions.Models;
     using Football.Infrastructure.Data;
     using Football.Infrastructure.Data.Models;
     using System;

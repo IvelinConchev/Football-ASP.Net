@@ -2,6 +2,7 @@
 {
     using System;
     using Football.Core.Services.Positions;
+    using Football.Core.Services.Positions.Models;
 
     public interface IPositionService
     {

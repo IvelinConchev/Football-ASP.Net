@@ -1,4 +1,4 @@
-﻿namespace Football.Core.Services.Positions
+﻿namespace Football.Core.Services.Positions.Models
 {
     using System;
 
