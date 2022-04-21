@@ -1,6 +1,8 @@
 ﻿namespace Football.Core.Services.Teams.Models
 {
-    public class LatestTeamServiceModel
+    using Football.Core.Contracts;
+
+    public class LatestTeamServiceModel : ITeamModel
     {
         public Guid Id { get; set; }
 

@@ -8,6 +8,8 @@
 
         public Guid PlayerId { get; init; }
 
+        public string PlayerName { get; init; }
+
         public Guid ManagerId { get; init; }
 
         public string ManagerName { get; init; }

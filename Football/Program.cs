@@ -1,3 +1,4 @@
+using Football.Controllers;
 using Football.Core.Constants;
 using Football.Extensions;
 using Football.Infrastructure.Data;
@@ -75,21 +76,38 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "Area",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "Area",
+//    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "Manager",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "Manager",
+//    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapRazorPages();
+//app.MapRazorPages();
 
 app.PrepareDatabase();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapDefaultAreaRoute();
+
+    endpoints.MapControllerRoute(
+     name: "Team Details",
+     pattern: "/Teams/Details/{id}/{information}",
+     defaults: new 
+     { 
+         controller = typeof(TeamsController).GetControllerName(),
+         action = nameof(TeamsController.Details) 
+     });
+
+    endpoints.MapDefaultControllerRoute();
+    endpoints.MapRazorPages();
+});
 
 
 app.Run();

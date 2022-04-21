@@ -99,7 +99,7 @@
                 NickName = t.NickName,
                 PlayerId = t.PlayerId,
                 PlayerName = t.Player.Team,
-                UserId = t.Player.Manager.UserId
+                ManagerId = t.Player.Manager.Id
             })
             .FirstOrDefault();
 

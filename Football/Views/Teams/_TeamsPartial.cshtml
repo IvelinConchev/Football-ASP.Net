@@ -11,7 +11,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title text-center">@team.Name  @team.NickName @team.AwayKit</h5>
                     <br />
-                    <a asp-controller="Teams" asp-action="Details" asp-route-id=@team.Id class="btn btn-primary">Виж повече</a>
+                    <a asp-controller="Teams" asp-action="Details" asp-route-id="@team.Id" asp-route-information="@team.GetInformation()" class="btn btn-primary">Виж</a>
                     @if (ViewBag.AllowTeamEdit == true || User.IsAdmin())
                     {
                         <a asp-controller="Teams" asp-action="Edit" asp-route-id="@team.Id" class="btn btn-warning">Edit</a>

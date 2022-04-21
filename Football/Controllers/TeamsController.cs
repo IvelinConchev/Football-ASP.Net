@@ -45,7 +45,6 @@
         }
 
         [Authorize]
-
         public IActionResult Mine()
         {
             var myTeams = this.teams.ByUser(this.User.Id());
@@ -53,8 +52,20 @@
             return View(myTeams);
         }
 
-        [Authorize]
+        public IActionResult Details(Guid id, string information)
+        {
+            var team = this.teams.Details(id);
 
+            if (information != team.GetInformation())
+            {
+                return BadRequest();
+            }
+
+            return View(team);
+        }
+
+
+        [Authorize]
         public IActionResult Add()
         {
             if (!this.managers.IsManager(this.User.Id()))
@@ -72,7 +83,6 @@
 
         [HttpPost]
         [Authorize]
-
         public IActionResult Add(TeamFormModel team)
         {
             var managerId = this.managers.IdByUser(this.User.Id());
@@ -163,7 +173,6 @@
 
         [HttpPost]
         [Authorize]
-
         public IActionResult Edit(Guid id, TeamFormModel team)
         {
             var managerId = this.managers.IdByUser(this.User.Id());
