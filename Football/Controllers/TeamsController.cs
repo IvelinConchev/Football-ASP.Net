@@ -241,7 +241,7 @@
 
             var delete = this.teams.Delete(id);
 
-            TempData[GlobalMessageKey] = $"You Team was deleted!";
+            TempData[DangerMessageKey] = $"You Team was deleted!";
 
             return RedirectToAction(nameof(All));
         }
