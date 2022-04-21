@@ -54,6 +54,9 @@
             Guid playerId,
             bool isPublic);
 
+
+        Guid Delete(Guid id);
+
         IEnumerable<TeamServiceModel> ByUser(string userId);
 
         bool IsByManager(Guid teamId, Guid managerId);

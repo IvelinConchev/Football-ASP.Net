@@ -267,5 +267,18 @@
 
             this.data.SaveChanges();
         }
+
+        public Guid Delete(Guid id)
+        {
+            var deleteTeam = this.data
+                .Teams
+                .FirstOrDefault(t => t.Id == id);
+
+            var result = data.Teams.Remove(deleteTeam);
+
+            this.data.SaveChanges();
+
+            return id;
+        }
     }
 }

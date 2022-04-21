@@ -231,6 +231,20 @@
             return RedirectToAction(nameof(Details), new { id, information = team.GetInformation() });
         }
 
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            if (id.Equals(Guid.Empty))
+            {
+                return NotFound();
+            }
+
+            var delete = this.teams.Delete(id);
+
+            TempData[GlobalMessageKey] = $"You Team was deleted!";
+
+            return RedirectToAction(nameof(All));
+        }
         private string UploadFile(TeamFormModel model)
         {
             string fileName = null;
