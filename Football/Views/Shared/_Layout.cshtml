@@ -23,6 +23,8 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    
                 @if (User.IsInRole(DataConstants.Roles.RoleNameAdministrator) || (User.IsInRole(DataConstants.Roles.RoleNameManager)))
                 {
                     <li class="nav-item">
@@ -129,13 +131,24 @@
                             <h1 class="m-0">@ViewData["Title"]</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-left">
+                               @* <li class="breadcrumb-item"><a href="#">Home</a></li>*@
+                                @if (User.IsAdmin())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Teams" asp-action="All">Administration</a>
+                            </li>
+                        }
+                        @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="All">All teams</a>*@
+                                </ol>
                             <ol class="breadcrumb float-sm-right">
                                 @*<li class="breadcrumb-item"><a href="#">Home</a></li>*@
                                 @* <li class="breadcrumb-item active">Starter Page</li>*@
                                 @if (User.IsInRole(DataConstants.Roles.RoleNameAdministrator))
                                 {
-                                     <a class="nav-link text-dark" asp-area="Admin" asp-controller="home" asp-action="Index">Admin palnel</a>
-                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="user" asp-action="Manageusers">Admin Roles</a>
+                                     <a class="nav-link text-dark" asp-area="Admin" asp-controller="Teams" asp-action="All">Admin palnel</a>
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="Manageusers">Admin Roles</a>
                                 }
                                 else if (User.IsInRole(DataConstants.Roles.RoleNameManager))
                                  {

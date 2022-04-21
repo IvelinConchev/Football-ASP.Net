@@ -3,11 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Football.Core.Contracts;
     using Football.Core.Services.Teams.Models;
     using Microsoft.AspNetCore.Http;
 
     using static Football.Infrastructure.Data.DataConstants.Team;
-    public class TeamFormModel
+    public class TeamFormModel : ITeamModel
     {
         [Display(Name = "Име")]
         [Required]

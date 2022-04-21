@@ -21,7 +21,7 @@
         public StatisticsServiceModel Total()
         {
             //var totalPlayers = this.data.Players.Count();
-            var totalTeams = this.data.Teams.Count();
+            var totalTeams = this.data.Teams.Count(t => t.IsPublic);
             var totalUsers = this.data.Users.Count();
 
             return new StatisticsServiceModel

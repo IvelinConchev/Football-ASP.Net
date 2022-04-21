@@ -16,13 +16,15 @@
             => this.data = _data;
 
         public TeamQueryServiceModel All(
-            string name,
-            string searchTerm,
-            TeamSorting sorting,
-            int currentPage,
-            int teamsPerPage)
+            string name = null,
+            string searchTerm = null,
+            TeamSorting sorting = TeamSorting.Champion,
+            int currentPage = 1,
+            int teamsPerPage = int.MaxValue,
+            bool publicOnly = true)
         {
-            var teamsQuery = this.data.Teams.AsQueryable();
+            var teamsQuery = this.data.Teams
+                .Where(t => !publicOnly || t.IsPublic);
 
             if (!string.IsNullOrWhiteSpace(name))
             {
@@ -63,6 +65,7 @@
         public IEnumerable<LatestTeamServiceModel> Latest()
         => this.data
                 .Teams
+                .Where(t => t.IsPublic)
                 .OrderByDescending(p => p.Id)
                 .Select(p => new LatestTeamServiceModel
                 {
@@ -103,7 +106,23 @@
             })
             .FirstOrDefault();
 
-        public Guid Create(string name, string image, string webSite, string logoUrl, string homeKit, string awayKit, string nickName, string description, string address, string headCoach, int champion, int cup, int win, int defeats, Guid playerId, Guid managerId)
+        public Guid Create(
+            string name,
+            string image,
+            string webSite,
+            string logoUrl,
+            string homeKit,
+            string awayKit,
+            string nickName,
+            string description,
+            string address,
+            string headCoach,
+            int champion,
+            int cup,
+            int win,
+            int defeats,
+            Guid playerId,
+            Guid managerId)
         {
             var teamData = new Team
             {
@@ -122,6 +141,7 @@
                 Win = win,
                 Defeats = defeats,
                 PlayerId = playerId,
+                IsPublic = false
                 //ManagerId = managerId
             };
 
@@ -131,7 +151,24 @@
             return teamData.Id;
         }
 
-        public bool Edit(Guid id, string name, string image, string webSite, string logoUrl, string homeKit, string awayKit, string nickName, string description, string address, string headCoach, int champion, int cup, int win, int defeats, Guid playerId)
+        public bool Edit(
+            Guid id, 
+            string name,
+            string image,
+            string webSite,
+            string logoUrl,
+            string homeKit,
+            string awayKit,
+            string nickName,
+            string description,
+            string address,
+            string headCoach,
+            int champion,
+            int cup,
+            int win,
+            int defeats,
+            Guid playerId,
+            bool isPublic)
         {
             var teamData = this.data.Teams.Find(id);
             if (teamData == null)
@@ -154,6 +191,7 @@
             teamData.Win = win;
             teamData.Defeats = defeats;
             teamData.PlayerId = playerId;
+            teamData.IsPublic = isPublic;
 
             this.data.SaveChanges();
 
@@ -163,7 +201,8 @@
         public IEnumerable<TeamServiceModel> ByUser(string userId)
         => GetTeams(this.data
             .Teams
-            .Where(t => t.Player.Manager.UserId == userId));
+             //.Where(t => t.Player.Manager.UserId == userId));
+             .Where(t => t.Player.Manager.UserId == userId));
 
         public bool IsByManager(Guid teamId, Guid managerId)
         => this.data
@@ -215,10 +254,18 @@
                  NickName = t.NickName,
                  WebSite = t.WebSite,
                  Win = t.Win,
-                 PlayerName = t.Player.FirstName
+                 PlayerName = t.Player.FirstName,
+                 IsPublic = t.IsPublic
              })
             .ToList();
 
+        public void ChangeVisibility(Guid teamId)
+        {
+            var team = this.data.Teams.Find(teamId);
 
+            team.IsPublic = !team.IsPublic;
+
+            this.data.SaveChanges();
+        }
     }
 }

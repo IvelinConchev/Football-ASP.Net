@@ -2,7 +2,7 @@
 {
     using Football.Core.Contracts;
 
-    public class TeamServiceModel : ITeamModel
+    public class TeamServiceModel : ITeamModel 
     {
         public Guid Id { get; set; }
 
@@ -35,5 +35,7 @@
         public int Defeats { get; set; }
 
         public string PlayerName { get; init; }
+
+        public bool IsPublic { get; init; }
     }
 }

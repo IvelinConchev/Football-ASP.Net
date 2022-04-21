@@ -22,7 +22,7 @@
         public string Image { get; set; }
 
         [StringLength(TeamWebSiteMaxLength)]
-        public string? WebSite { get; set; }
+        public string WebSite { get; set; }
 
         [Required]
         public string LogoUrl { get; set; }
@@ -56,6 +56,8 @@
         public int Win { get; set; }
 
         public int Defeats { get; set; }
+
+        public bool IsPublic { get; set; }
 
         public Guid PlayerId { get; set; }
 

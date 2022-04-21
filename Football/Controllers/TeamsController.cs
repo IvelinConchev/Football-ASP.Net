@@ -108,27 +108,27 @@
 
             string stringFileName = UploadFile(team);
 
-            this.teams.Create(
-                team.Name,
-                stringFileName,
-                team.WebSite,
-                team.LogoUrl,
-                team.HomeKit,
-                team.AwayKit,
-                team.NickName,
-                team.Description,
-                team.Address,
-                team.HeadCoach,
-                team.Champion,
-                team.Cup,
-                team.Win,
-                team.Defeats,
-                team.PlayerId,
-                managerId);
+            var teamId = this.teams.Create(
+                 team.Name,
+                 stringFileName,
+                 team.WebSite,
+                 team.LogoUrl,
+                 team.HomeKit,
+                 team.AwayKit,
+                 team.NickName,
+                 team.Description,
+                 team.Address,
+                 team.HeadCoach,
+                 team.Champion,
+                 team.Cup,
+                 team.Win,
+                 team.Defeats,
+                 team.PlayerId,
+                 managerId);
 
-            TempData[GlobalMessageKey] = "You Team was added successfully!";
+            TempData[GlobalMessageKey] = "You Team was added and is awaiting for approval!";
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Details), new { id = teamId, information = team.GetInformation() });
         }
 
         [Authorize]
@@ -202,27 +202,33 @@
                 return BadRequest();
             }
 
-            this.teams.Edit(
-                id,
-                team.Name,
-                stringFileName,
-                team.WebSite,
-                team.LogoUrl,
-                team.HomeKit,
-                team.AwayKit,
-                team.NickName,
-                team.Description,
-                team.Address,
-                team.HeadCoach,
-                team.Champion,
-                team.Cup,
-                team.Win,
-                team.Defeats,
-                team.PlayerId);
+            var edited = this.teams.Edit(
+                  id,
+                  team.Name,
+                  stringFileName,
+                  team.WebSite,
+                  team.LogoUrl,
+                  team.HomeKit,
+                  team.AwayKit,
+                  team.NickName,
+                  team.Description,
+                  team.Address,
+                  team.HeadCoach,
+                  team.Champion,
+                  team.Cup,
+                  team.Win,
+                  team.Defeats,
+                  team.PlayerId,
+                  this.User.IsAdmin());
 
-            TempData[GlobalMessageKey] = "You Team was saved successfully!";
+            if (!edited)
+            {
+                return BadRequest();
+            }
 
-            return RedirectToAction(nameof(All));
+            TempData[GlobalMessageKey] = $"You Team was edited {(this.User.IsAdmin() ? string.Empty : " and is await for approval")}!";
+
+            return RedirectToAction(nameof(Details), new { id, information = team.GetInformation() });
         }
 
         private string UploadFile(TeamFormModel model)

@@ -1,17 +1,18 @@
 ﻿namespace Football.Core.Contracts
 {
-    using System;
     using Football.Core.Models.Teams;
     using Football.Core.Services.Teams.Models;
+    using System;
 
     public interface ITeamService
     {
         TeamQueryServiceModel All(
-            string name,
-            string searchTerm,
-            TeamSorting sorting,
-            int currentPage,
-            int teamsPerPage);
+            string name = null,
+            string searchTerm = null,
+            TeamSorting sorting = TeamSorting.Champion,
+            int currentPage = 1,
+            int teamsPerPage = int.MaxValue,
+            bool publicOnly = true);
 
         IEnumerable<LatestTeamServiceModel> Latest();
 
@@ -50,13 +51,15 @@
             int cup,
             int win,
             int defeats,
-            Guid playerId);
+            Guid playerId,
+            bool isPublic);
 
         IEnumerable<TeamServiceModel> ByUser(string userId);
 
         bool IsByManager(Guid teamId, Guid managerId);
 
-        // IEnumerable<string> AllTeams();
+        void ChangeVisibility(Guid teamId);  
+
         IEnumerable<string> AllPlayers();
 
         IEnumerable<TeamPlayersServiceModel> AllTeams();
