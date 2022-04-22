@@ -230,6 +230,7 @@
             .Players
             .Any(p => p.Id == playerId);
 
+        //TODO
         public bool ManagerExists(Guid managerId)
         => this.data
             .Managers
