@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static WebConstants;
     public class StadiumsController : Controller
     {
         private readonly IStadiumService stadiums;
@@ -49,8 +50,19 @@
             return View(myStadiums);
         }
 
-        [Authorize]
+        public IActionResult Details(Guid id, string information)
+        {
+            var stadium = this.stadiums.Details(id);
 
+            if (information != stadium.GetInformation())
+            {
+                return BadRequest();
+            }
+
+            return View(stadium);
+        }
+
+        [Authorize]
         public IActionResult Add()
         {
             if (!this.managers.IsManager(this.User.Id()))
@@ -90,16 +102,19 @@
 
             string stringFileName = UploadFile(stadium);
 
-            this.stadiums.Create(
-                stadium.Name,
-                stringFileName,
-                stadium.Description,
-                stadium.Capacity,
-                stadium.Address,
-                stadium.CityId,
-                managerId);
+            var stadiumId = this.stadiums.Create(
+                  stadium.Name,
+                  stringFileName,
+                  stadium.Description,
+                  stadium.Capacity,
+                  stadium.Address,
+                  stadium.CityId,
+                  managerId);
 
-            return RedirectToAction(nameof(All));
+
+            TempData[GlobalMessageKey] = "You Stadium was added and is awaiting for approval!";
+
+            return RedirectToAction(nameof(Details), new { id = stadiumId, information = stadium.GetInformation() });
         }
 
         [Authorize]
@@ -163,16 +178,24 @@
                 return BadRequest();
             }
 
-            this.stadiums.Edit(
-                id,
-                stadium.Name,
-                stringFileName,
-                stadium.Description,
-                stadium.Capacity,
-                stadium.Address,
-                stadium.CityId);
+            var edited = this.stadiums.Edit(
+                   id,
+                   stadium.Name,
+                   stringFileName,
+                   stadium.Description,
+                   stadium.Capacity,
+                   stadium.Address,
+                   stadium.CityId,
+                   this.User.IsAdmin());
 
-            return RedirectToAction(nameof(All));
+            if (!edited)
+            {
+                return BadRequest();
+            }
+
+            TempData[GlobalMessageKey] = $"You Team was edited {(this.User.IsAdmin() ? string.Empty : " and is await for approval")}!";
+
+            return RedirectToAction(nameof(Details), new { id, information = stadium.GetInformation() });
         }
 
         private string UploadFile(StadiumFormModel model)

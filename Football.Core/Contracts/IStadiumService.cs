@@ -1,22 +1,19 @@
 ﻿namespace Football.Core.Contracts
 {
     using Football.Core.Models.Stadiums;
-    using Football.Core.Services.Stadiums;
     using Football.Core.Services.Stadiums.Models;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public interface IStadiumService
     {
         StadiumQueryServiceModel All(
-            string name,
-            string searchTerm,
-            StadiumSorting sorting,
-            int currentPage,
-            int stadiumsPerPage);
+            string name = null,
+            string searchTerm = null,
+            StadiumSorting sorting = StadiumSorting.Name,
+            int currentPage = 1,
+            int stadiumsPerPage = int.MaxValue,
+            bool publicOnly = true);
 
         StadiumDetailsServiceModel Details(Guid stadiumId);
 
@@ -36,11 +33,16 @@
             string description,
             int capacity,
             string address,
-            Guid cityId);
+            Guid cityId,
+            bool isPublic);
+
+        Guid Delete(Guid id);
 
         IEnumerable<StadiumServiceModel> ByUser(string userId);
 
         bool IsByManager(Guid stadiumId, Guid managerId);
+
+        void ChangeVisibility(Guid teamId);
 
         IEnumerable<string> AllNames();
 

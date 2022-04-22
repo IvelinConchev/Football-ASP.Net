@@ -27,5 +27,7 @@
         [Required]
         [StringLength(StadiumAddressMaxLength)]
         public string Address { get; set; }
+
+        public bool IsPublic { get; set; }
     }
 }

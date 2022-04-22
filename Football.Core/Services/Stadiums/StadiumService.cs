@@ -18,13 +18,15 @@
         }
 
         public StadiumQueryServiceModel All(
-            string name,
-            string searchTerm,
-            StadiumSorting sorting,
-            int currentPage,
-            int stadiumsPerPage)
+            string name = null,
+            string searchTerm = null,
+            StadiumSorting sorting = StadiumSorting.Name,
+            int currentPage = 1,
+            int stadiumsPerPage = int.MaxValue,
+            bool publicOnly = true)
         {
-            var stadiumsQuery = this.data.Stadiums.AsQueryable();
+            var stadiumsQuery = this.data.Stadiums
+                .Where(c => !publicOnly || c.IsPublic);
 
             if (!string.IsNullOrWhiteSpace(name))
             {
@@ -74,7 +76,14 @@
             .FirstOrDefault();
 
 
-        public Guid Create(string name, string image, string description, int capacity, string address, Guid cityId, Guid managerId)
+        public Guid Create(
+            string name,
+            string image,
+            string description,
+            int capacity,
+            string address,
+            Guid cityId,
+            Guid managerId)
         {
             var stadiumData = new Stadium
             {
@@ -83,7 +92,7 @@
                 Description = description,
                 Capacity = capacity,
                 Address = address,
-
+                IsPublic = false,
             };
 
             this.data.Stadiums.Add(stadiumData);
@@ -93,7 +102,15 @@
             return stadiumData.Id;
         }
 
-        public bool Edit(Guid id, string name, string image, string description, int capacity, string address, Guid cityId)
+        public bool Edit(
+            Guid id,
+            string name,
+            string image,
+            string description,
+            int capacity,
+            string address,
+            Guid cityId,
+            bool isPublic)
         {
             var stadiumData = this.data.Stadiums.Find(id);
 
@@ -107,6 +124,7 @@
             stadiumData.Description = description;
             stadiumData.Capacity = capacity;
             stadiumData.Address = address;
+            stadiumData.IsPublic = isPublic;
 
             this.data.SaveChanges();
 
@@ -162,8 +180,31 @@
                 Image = s.Image,
                 Description = s.Description,
                 Capacity = s.Capacity,
+                IsPublic = s.IsPublic
                 //CityName = s.City
             })
             .ToList();
+
+        public void ChangeVisibility(Guid stadiumId)
+        {
+            var stadium = this.data.Stadiums.Find(stadiumId);
+
+            stadium.IsPublic = !stadium.IsPublic;
+
+            this.data.SaveChanges();
+        }
+
+        public Guid Delete(Guid id)
+        {
+            var deleteStadium = this.data
+                .Stadiums
+                .FirstOrDefault(t => t.Id == id);
+
+            var result = data.Stadiums.Remove(deleteStadium);
+
+            this.data.SaveChanges();
+
+            return id;
+        }
     }
 }

@@ -120,7 +120,7 @@ app.UseEndpoints(endpoints =>
       defaults: new
       {
           controller = typeof(CitiesController).GetControllerName(),
-          //action = nameof(CitiesController.Details)
+          action = nameof(CitiesController.Details)
       });
 
     endpoints.MapControllerRoute(
@@ -138,7 +138,7 @@ app.UseEndpoints(endpoints =>
       defaults: new
       {
           controller = typeof(StadiumsController).GetControllerName(),
-          //action = nameof(StadiumsController.Details)
+          action = nameof(StadiumsController.Details)
       });
 
     endpoints.MapDefaultControllerRoute();
