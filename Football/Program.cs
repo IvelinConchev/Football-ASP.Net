@@ -111,7 +111,7 @@ app.UseEndpoints(endpoints =>
         defaults: new
         {
             controller = typeof(PlayersController).GetControllerName(),
-            //action = nameof(PlayersController.Details)
+            action = nameof(PlayersController.Details)
         });
 
     endpoints.MapControllerRoute(

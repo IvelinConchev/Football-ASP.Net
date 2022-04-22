@@ -17,13 +17,15 @@
          => this.data = _data;
 
         public PlayerQueryServiceModel All(
-            string team,
-            string searchTerm,
-            PlayerSorting sorting,
-            int currentPage,
-            int playersPerPage)
+            string team = null,
+            string searchTerm = null,
+            PlayerSorting sorting = PlayerSorting.Team,
+            int currentPage = 1,
+            int playersPerPage = int.MaxValue,
+            bool publicOnly = true)
         {
-            var playersQuery = this.data.Players.AsQueryable();
+            var playersQuery = this.data.Players
+                .Where(c => !publicOnly || c.IsPublic);
 
             if (!string.IsNullOrWhiteSpace(team))
             {
@@ -92,7 +94,21 @@
             })
             .FirstOrDefault();
 
-        public Guid Create(string firstName, string middleName, string lastName, string team, int age, double weight, double height, string image, int goal, byte shirtNumber, string nationality, string description, Guid positionId, Guid managerId)
+        public Guid Create(
+            string firstName,
+            string middleName,
+            string lastName,
+            string team,
+            int age,
+            double weight,
+            double height,
+            string image,
+            int goal,
+            byte shirtNumber,
+            string nationality
+            , string description,
+            Guid positionId,
+            Guid managerId)
         {
             var playerData = new Player
             {
@@ -109,7 +125,8 @@
                 Nationality = nationality,
                 Description = description,
                 PositionId = positionId,
-                ManagerId = managerId
+                ManagerId = managerId,
+                IsPublic = false
             };
 
             this.data.Players.Add(playerData);
@@ -118,7 +135,22 @@
             return playerData.Id;
         }
 
-        public bool Edit(Guid id, string firstName, string middleName, string lastName, string team, int age, double weight, double height, string image, int goal, byte shirtNumber, string nationality, string description, Guid positionId)
+        public bool Edit(
+            Guid id,
+            string firstName,
+            string middleName,
+            string lastName,
+            string team,
+            int age,
+            double weight,
+            double height,
+            string image,
+            int goal,
+            byte shirtNumber,
+            string nationality,
+            string description,
+            Guid positionId,
+            bool isPublic)
         {
             var playerData = this.data.Players.Find(id);
 
@@ -140,6 +172,7 @@
             playerData.Nationality = nationality;
             playerData.Description = description;
             playerData.PositionId = positionId;
+            playerData.IsPublic = isPublic;
 
             this.data.SaveChanges();
 
@@ -163,7 +196,7 @@
             => this.data
             .Players
             .Any(p => p.Id == managerId && p.ManagerId == managerId);
-        
+
         private static IEnumerable<PlayerServiceModel> GetPlayers(IQueryable<Player> playerQuery)
             => playerQuery
             .Select(p => new PlayerServiceModel
@@ -180,7 +213,8 @@
                 ShirtNumber = p.ShirtNumber,
                 Nationality = p.Nationality,
                 Description = p.Description,
-                PositionName = p.Position.Name
+                PositionName = p.Position.Name,
+                IsPublic = p.IsPublic
             })
             .ToList();
 
@@ -207,6 +241,28 @@
             .Distinct()
             .OrderBy(t => t)
             .ToList();
+
+        public void ChangeVisibility(Guid playerId)
+        {
+            var player = this.data.Players.Find(playerId);
+
+            player.IsPublic = !player.IsPublic;
+
+            this.data.SaveChanges();
+        }
+
+        public Guid Delete(Guid id)
+        {
+            var deletePlayer = this.data
+                .Players
+                .FirstOrDefault(t => t.Id == id);
+
+            var result = data.Players.Remove(deletePlayer);
+
+            this.data.SaveChanges();
+
+            return id;
+        }
 
     }
 }

@@ -50,6 +50,8 @@
         [Required]
         public string Description { get; set; }
 
+        public bool IsPublic { get; set; }
+
         public Guid PositionId { get; set; }
 
         [ForeignKey(nameof(PositionId))]

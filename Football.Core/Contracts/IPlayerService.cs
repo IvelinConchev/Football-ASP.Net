@@ -7,11 +7,12 @@
     public interface IPlayerService
     {
         PlayerQueryServiceModel All(
-            string team,
-            string searchTerm,
-            PlayerSorting sorting,
-            int currentPage,
-            int playersPerPage);
+            string team = null,
+            string searchTerm = null,
+            PlayerSorting sorting = PlayerSorting.Team,
+            int currentPage = 1,
+            int playersPerPage = int.MaxValue,
+            bool publicOnly = true);
 
         PlayerDetailsServiceModel Details(Guid playerId);
 
@@ -45,11 +46,16 @@
             byte shirtNumber,
             string nationality,
             string description,
-            Guid positionId);
+            Guid positionId,
+            bool isPublic);
+
+        Guid Delete(Guid id);
 
         IEnumerable<PlayerServiceModel> ByUser(string userId);
 
         bool IsByManager(Guid palyerId, Guid managerId);
+
+        void ChangeVisibility(Guid teamId);
 
         IEnumerable<string> AllTeams();
 

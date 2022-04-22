@@ -1,6 +1,8 @@
 ﻿namespace Football.Core.Services.Players.Models
 {
-    public class PlayerServiceModel
+    using Football.Core.Contracts;
+
+    public class PlayerServiceModel : IPlayerModel
     {
         public Guid Id { get; set; }
 
@@ -29,5 +31,7 @@
         public string Description { get; set; }
 
         public string PositionName { get; set; }
+
+        public bool IsPublic { get; init; }
     }
 }

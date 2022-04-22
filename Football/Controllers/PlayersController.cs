@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using static WebConstants;
+    using static Football.Infrastructure.Data.DataConstants;
     public class PlayersController : Controller
     {
         private readonly IPlayerService players;
@@ -44,8 +45,19 @@
             return View(query);
         }
 
-        [Authorize]
+        public IActionResult Details(Guid id, string information)
+        {
+            var player = this.players.Details(id);
 
+            if (information != player.GetInformation())
+            {
+                return BadRequest();
+            }
+
+            return View(player);
+        }
+
+        [Authorize]
         public IActionResult Mine()
         {
             var myPlayers = this.players.ByUser(this.User.Id());
@@ -54,7 +66,6 @@
         }
 
         [Authorize]
-
         public IActionResult Add()
         {
             //TODO
@@ -95,7 +106,7 @@
 
             string stringFileName = UploadFile(player);
 
-            this.players.Create(
+            var playerId = this.players.Create(
                 player.FirstName,
                 player.MiddleName,
                 player.LastName,
@@ -111,9 +122,9 @@
                 player.PositionId,
                 managerId);
 
-            TempData[GlobalMessageKey] = "You Player was added successfully!";
+            TempData[GlobalMessageKey] = "You Player was added and is awaiting for approval!";
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Details), new { id = playerId, information = player.GetInformation() });
         }
 
         [Authorize]
@@ -128,7 +139,7 @@
 
             var player = this.players.Details(id);
 
-            if (player.UserId != userId && !User.IsAdmin())
+            if (player.UserId != userId && !User.IsInRole(Roles.RoleNameAdministrator))
             {
                 return Unauthorized();
             }
@@ -178,10 +189,10 @@
                 return View(player);
             }
 
-            if (!this.players.IsByManager(id, managerId) && !User.IsAdmin())
-            {
-                return BadRequest();
-            }
+            //if (!this.players.IsByManager(id, managerId) && !User.IsAdmin())
+            //{
+            //    return BadRequest();
+            //}
 
             this.players.Edit(
                 id,
@@ -197,11 +208,12 @@
                 player.ShirtNumber,
                 player.Nationality,
                 player.Description,
-                player.PositionId);
+                player.PositionId,
+                this.User.IsAdmin());
 
-            TempData[GlobalMessageKey] = "You Player was saved successfully!";
+            TempData[GlobalMessageKey] = $"You Team was edited {(this.User.IsAdmin() ? string.Empty : " and is await for approval!")}";
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Details), new { id, information = player.GetInformation() });
         }
 
         private string UploadFile(PlayerFormModel model)

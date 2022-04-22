@@ -3,13 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Football.Core.Contracts;
     using Football.Core.Services.Players;
     using Football.Core.Services.Players.Models;
     using Microsoft.AspNetCore.Http;
 
     using static Football.Infrastructure.Data.DataConstants.Player;
 
-    public class PlayerFormModel
+    public class PlayerFormModel : IPlayerModel
     {
         [Display(Name = "Име")]
         [Required]
@@ -56,7 +57,7 @@
         [Required]
         [StringLength(PlayerNationalityMaxLength, MinimumLength = PlayerNationalityMinLength, ErrorMessage = "Minimum: {2}, Maximum: {1}")]
         public string Nationality { get; init; }
-        
+
         [Display(Name = "Описание")]
         [Required()]
         [StringLength(int.MaxValue,
