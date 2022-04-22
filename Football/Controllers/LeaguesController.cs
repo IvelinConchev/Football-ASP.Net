@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static WebConstants;
     public class LeaguesController : Controller
     {
         private readonly ILeagueService leagues;
@@ -42,16 +43,25 @@
         }
 
         [Authorize]
-
         public IActionResult Mine()
         {
             var myLeagues = this.leagues.ByUser(this.User.Id());
 
             return View(myLeagues);
         }
+        public IActionResult Details(Guid id, string information)
+        {
+            var league = this.leagues.Details(id);
+
+            if (information != league.GetInformation())
+            {
+                return BadRequest();
+            }
+
+            return View(league);
+        }
 
         [Authorize]
-
         public IActionResult Add()
         {
             if (!this.managers.IsManager(this.User.Id()))
@@ -91,14 +101,16 @@
 
             string stringFileName = UploadFile(league);
 
-            this.leagues.Create(
-                league.Name,
-                stringFileName,
-                league.Description,
-                league.TeamId,
-                managerId);
+            var leagueId = this.leagues.Create(
+                  league.Name,
+                  stringFileName,
+                  league.Description,
+                  league.TeamId,
+                  managerId);
 
-            return RedirectToAction(nameof(All));
+            TempData[GlobalMessageKey] = "You League was added and is awaiting for approval!";
+
+            return RedirectToAction(nameof(Details), new { id = leagueId, information = league.GetInformation() });
         }
 
         [Authorize]
@@ -161,14 +173,23 @@
                 return BadRequest();
             }
 
-            this.leagues.Edit(
-                id,
-                league.Name,
-                stringFileName,
-                league.Description,
-                league.TeamId);
+            var edited = this.leagues.Edit(
+                  id,
+                  league.Name,
+                  stringFileName,
+                  league.Description,
+                  league.TeamId,
+                  this.User.IsAdmin());
 
-            return RedirectToAction(nameof(All));
+
+            if (!edited)
+            {
+                return BadRequest();
+            }
+
+            TempData[GlobalMessageKey] = $"You Team was edited {(this.User.IsAdmin() ? string.Empty : " and is await for approval")}!";
+
+            return RedirectToAction(nameof(Details), new { id, information = league.GetInformation() });
         }
 
         private string UploadFile(LeagueFormModel model)

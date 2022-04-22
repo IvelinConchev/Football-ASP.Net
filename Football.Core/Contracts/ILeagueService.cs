@@ -1,18 +1,18 @@
 ﻿namespace Football.Core.Contracts
 {
-    using System;
     using Football.Core.Models.Leagues;
-    using Football.Core.Services.Leagues;
     using Football.Core.Services.Leagues.Models;
+    using System;
 
     public interface ILeagueService
     {
         LeagueQueryServiceModel All(
-            string name,
-            string searchTerm,
-            LeagueSorting sorting,
-            int currentPage,
-            int leaguesPerPage);
+            string name = null,
+            string searchTerm = null,
+            LeagueSorting sorting = LeagueSorting.Name,
+            int currentPage = 1,
+            int leaguesPerPage = int.MaxValue,
+            bool publicOnly = true);
 
         LeagueDetailsServiceModel Details(Guid leagueId);
 
@@ -28,11 +28,16 @@
             string name,
             string image,
             string description,
-            Guid guidId);
+            Guid guidId,
+            bool isPublic);
+
+        Guid Delete(Guid id);
 
         IEnumerable<LeagueServiceModel> ByUser(string userId);
 
         bool IsByManager(Guid leagueId, Guid managerId);
+
+        void ChangeVisibility(Guid teamId);
 
         IEnumerable<string> AllNames();
 

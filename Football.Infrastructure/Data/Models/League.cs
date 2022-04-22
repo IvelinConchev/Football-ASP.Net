@@ -22,6 +22,8 @@
         [Required]
         public string Description { get; set; }
 
+        public bool IsPublic { get; set; }
+
         public Guid TeamId { get; set; }
 
         [ForeignKey(nameof(TeamId))]

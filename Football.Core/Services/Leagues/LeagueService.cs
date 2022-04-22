@@ -18,13 +18,15 @@
         }
 
         public LeagueQueryServiceModel All(
-            string name,
-            string searchTerm,
-            LeagueSorting sorting,
-            int currentPage,
-            int leaguesPerPage)
+            string name = null,
+            string searchTerm = null,
+            LeagueSorting sorting = LeagueSorting.Name,
+            int currentPage = 1,
+            int leaguesPerPage = int.MaxValue,
+            bool publicOnly = true)
         {
-            var leaguesQuery = this.data.Leagues.AsQueryable();
+            var leaguesQuery = this.data.Leagues
+                .Where(c => !publicOnly || c.IsPublic);
 
             if (!string.IsNullOrWhiteSpace(name))
             {
@@ -80,7 +82,11 @@
             })
             .FirstOrDefault();
 
-        public Guid Create(string name, string image, string description, Guid teamId, Guid managerId)
+        public Guid Create(string name,
+            string image,
+            string description,
+            Guid teamId,
+            Guid managerId)
         {
             var leagueData = new League
             {
@@ -88,6 +94,7 @@
                 Image = image,
                 Description = description,
                 TeamId = teamId,
+                IsPublic = false
                 // ManagerId = managerId
             };
 
@@ -98,7 +105,12 @@
             return leagueData.Id;
         }
 
-        public bool Edit(Guid id, string name, string image, string description, Guid teamId)
+        public bool Edit(Guid id,
+            string name,
+            string image,
+            string description,
+            Guid teamId,
+            bool isPublic)
         {
             var leagueData = this.data.Leagues.Find(id);
 
@@ -111,6 +123,7 @@
             leagueData.Image = image;
             leagueData.Description = description;
             leagueData.TeamId = teamId;
+            leagueData.IsPublic = isPublic;
 
             this.data.SaveChanges();
 
@@ -143,6 +156,7 @@
                 Name = l.Name,
                 Image = l.Image,
                 Description = l.Description,
+                IsPublic = l.IsPublic
             })
             .ToList();
 
@@ -156,11 +170,31 @@
             })
             .ToList();
 
-
         public bool TeamExists(Guid leagueId)
         => this.data
             .Leagues
             .Any(l => l.Id == leagueId);
 
+        public void ChangeVisibility(Guid leagueId)
+        {
+            var league = this.data.Leagues.Find(leagueId);
+
+            league.IsPublic = !league.IsPublic;
+
+            this.data.SaveChanges();
+        }
+
+        public Guid Delete(Guid id)
+        {
+            var deleteLeague = this.data
+                .Leagues
+                .FirstOrDefault(t => t.Id == id);
+
+            var result = data.Leagues.Remove(deleteLeague);
+
+            this.data.SaveChanges();
+
+            return id;
+        }
     }
 }

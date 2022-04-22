@@ -129,7 +129,7 @@ app.UseEndpoints(endpoints =>
       defaults: new
       {
           controller = typeof(LeaguesController).GetControllerName(),
-          //action = nameof(LeaguesController.Details)
+          action = nameof(LeaguesController.Details)
       });
 
     endpoints.MapControllerRoute(
