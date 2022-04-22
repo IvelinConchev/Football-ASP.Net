@@ -25,5 +25,7 @@
 
         [Required]
         public string Desctription { get; set; }
+
+        public bool IsPublic { get; set; }
     }
 }

@@ -136,7 +136,19 @@
                                 @if (User.IsAdmin())
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Teams" asp-action="All">Administration</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Players" asp-action="All">AdministrationPlayers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Teams" asp-action="All">AdministrationTeams</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Cities" asp-action="All">AdministrationCities</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Leagues" asp-action="All">AdministrationLeagues</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Stadiums" asp-action="All">AdministrationStadiums</a>
                             </li>
                         }
                         @*<li class="nav-item">

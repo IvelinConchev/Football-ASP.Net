@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static WebConstants;
     public class CitiesController : Controller
     {
         private readonly IManagerService managers;
@@ -52,6 +53,18 @@
             return View(myCities);
         }
 
+        public IActionResult Details(Guid id, string information)
+        {
+            var city = this.cities.Details(id);
+
+            if (information != city.GetInformation())
+            {
+                return BadRequest();
+            }
+
+            return View(city);
+        }
+
         [Authorize]
 
         public IActionResult Add()
@@ -95,14 +108,16 @@
 
             string stringFileName = UploadFile(city);
 
-            this.cities.Create(
-                city.Name,
-                city.PostCode,
-                stringFileName,
-                city.Description,
-                city.TeamId);
+            var cityId = this.cities.Create(
+                  city.Name,
+                  city.PostCode,
+                  stringFileName,
+                  city.Description,
+                  city.TeamId);
 
-            return RedirectToAction(nameof(All));
+            TempData[GlobalMessageKey] = "You Team was added and is awaiting for approval!";
+
+            return RedirectToAction(nameof(Details), new { id = cityId, information = city.GetInformation() });
 
         }
 
@@ -170,15 +185,23 @@
                 return BadRequest();
             }
 
-            this.cities.Edit(
-                id,
-                city.Name,
-                city.PostCode,
-                strinfFileName,
-                city.Description,
-                city.TeamId);
+            var edited = this.cities.Edit(
+                  id,
+                  city.Name,
+                  city.PostCode,
+                  strinfFileName,
+                  city.Description,
+                  city.TeamId,
+                  this.User.IsAdmin());
 
-            return RedirectToAction(nameof(All));
+            if (!edited)
+            {
+                return BadRequest();
+            }
+
+            TempData[GlobalMessageKey] = $"You Team was edited {(this.User.IsAdmin() ? string.Empty : " and is await for approval")}!";
+
+            return RedirectToAction(nameof(Details), new { id, information = city.GetInformation() });
         }
         private string UploadFile(CityFormModel model)
         {

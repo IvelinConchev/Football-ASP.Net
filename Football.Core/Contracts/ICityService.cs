@@ -7,11 +7,12 @@
     public interface ICityService
     {
         CityQueryServiceModel All(
-            string team,
-            string searchTerm,
-            CitySorting sorting,
-            int currentPage,
-            int citiesPerPage);
+            string team = null,
+            string searchTerm = null,
+            CitySorting sorting = CitySorting.Name,
+            int currentPage = 1,
+            int citiesPerPage = int.MaxValue,
+            bool publicOnly = true);
 
         CityDetailsServiceModel Details(Guid guid);
 
@@ -27,11 +28,16 @@
             string postCode,
             string image,
             string description,
-            Guid teamId);
+            Guid teamId,
+            bool isPublic);
 
-        IEnumerable<CityServiceModel> ByUser(string userId);    
+        Guid Delete(Guid id);
+
+        IEnumerable<CityServiceModel> ByUser(string userId);
 
         bool IsByManager(Guid cityId, Guid managerId);
+
+        void ChangeVisibility(Guid teamId);
 
         IEnumerable<string> AllNames();
 

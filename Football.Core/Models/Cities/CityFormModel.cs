@@ -3,12 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Football.Core.Contracts;
     using Football.Core.Services.Cities.Models;
     using Microsoft.AspNetCore.Http;
 
     using static Football.Infrastructure.Data.DataConstants.City;
 
-    public class CityFormModel
+    public class CityFormModel : ICityModel
     {
         [Display(Name = "City Name")]
         [Required]

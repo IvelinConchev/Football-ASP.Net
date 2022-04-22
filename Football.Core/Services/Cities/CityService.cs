@@ -18,13 +18,15 @@
         }
 
         public CityQueryServiceModel All
-            (string name,
-            string searchTerm,
-            CitySorting sorting,
-            int currentPage,
-            int citiesPerPage)
+            (string name = null,
+            string searchTerm = null,
+            CitySorting sorting = CitySorting.Name,
+            int currentPage = 1,
+            int citiesPerPage = int.MaxValue,
+            bool publicOnly = true)
         {
-            var citiesQuery = this.data.Cities.AsQueryable();
+            var citiesQuery = this.data.Cities
+                .Where(c => !publicOnly || c.IsPublic);
 
             if (!string.IsNullOrWhiteSpace(name))
             {
@@ -73,7 +75,11 @@
             })
             .FirstOrDefault();
 
-        public Guid Create(string name, string postCode, string image, string description, Guid teamId)
+        public Guid Create(string name,
+            string postCode,
+            string image,
+            string description,
+            Guid teamId)
         {
             var cityData = new City
             {
@@ -81,7 +87,7 @@
                 PostCode = postCode,
                 Image = image,
                 Desctription = description,
-
+                IsPublic = false
             };
 
             this.data.Cities.Add(cityData);
@@ -90,7 +96,13 @@
             return cityData.Id;
         }
 
-        public bool Edit(Guid id, string name, string postCode, string image, string description, Guid teamId)
+        public bool Edit(Guid id,
+            string name,
+            string postCode,
+            string image,
+            string description,
+            Guid teamId,
+            bool isPublic)
         {
             var cityData = this.data.Cities.Find(id);
             if (cityData == null)
@@ -102,6 +114,7 @@
             cityData.PostCode = postCode;
             cityData.Image = image;
             cityData.Desctription = description;
+            cityData.IsPublic = isPublic;
 
             this.data.SaveChanges();
 
@@ -131,6 +144,7 @@
                PostCode = c.PostCode,
                Image = c.Image,
                Desctription = c.Desctription,
+               IsPublic = c.IsPublic
            })
            .ToList();
 
@@ -156,5 +170,37 @@
             .Distinct()
             .OrderBy(n => n)
             .ToList();
+
+        public void ChangeVisibility(Guid cityId)
+        {
+            var city = this.data.Cities.Find(cityId);
+
+            city.IsPublic = !city.IsPublic;
+
+            this.data.SaveChanges();
+        }
+
+        public Guid Delete(Guid id)
+        {
+            var deleteCity = this.data
+                .Cities
+                .FirstOrDefault(c => c.Id == id);
+
+            var result = data.Cities.Remove(deleteCity);
+
+            this.data.SaveChanges();
+
+            return id;
+        }
+
+        public CityQueryServiceModel All(string team, string searchTerm, CitySorting sorting, int currentPage, int citiesPerPage)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Edit(Guid id, string name, string postCode, string image, string description, Guid teamId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

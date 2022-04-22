@@ -99,11 +99,47 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
      name: "Team Details",
      pattern: "/Teams/Details/{id}/{information}",
-     defaults: new 
-     { 
+     defaults: new
+     {
          controller = typeof(TeamsController).GetControllerName(),
-         action = nameof(TeamsController.Details) 
+         action = nameof(TeamsController.Details)
      });
+
+    endpoints.MapControllerRoute(
+    name: "Player Details",
+    pattern: "/Players/Details/{id}/{information}",
+        defaults: new
+        {
+            controller = typeof(PlayersController).GetControllerName(),
+            //action = nameof(PlayersController.Details)
+        });
+
+    endpoints.MapControllerRoute(
+    name: "City Details",
+    pattern: "/Cities/Details/{id}/{information}",
+      defaults: new
+      {
+          controller = typeof(CitiesController).GetControllerName(),
+          //action = nameof(CitiesController.Details)
+      });
+
+    endpoints.MapControllerRoute(
+    name: "League Details",
+    pattern: "/Leagues/Details/{id}/{information}",
+      defaults: new
+      {
+          controller = typeof(LeaguesController).GetControllerName(),
+          //action = nameof(LeaguesController.Details)
+      });
+
+    endpoints.MapControllerRoute(
+    name: "Stadium Details",
+    pattern: "/Stadiums/Details/{id}/{information}",
+      defaults: new
+      {
+          controller = typeof(StadiumsController).GetControllerName(),
+          //action = nameof(StadiumsController.Details)
+      });
 
     endpoints.MapDefaultControllerRoute();
     endpoints.MapRazorPages();
