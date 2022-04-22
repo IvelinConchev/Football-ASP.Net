@@ -63,11 +63,15 @@
             <span class="sr-only">Next</span>
         </button>
     </div>
+    <br />
 
-    <div class="mb-5">
+   <div class="row">
+    <div class="col-12 text-center">
+        <button class="btn btn-primary" id="statistics-button">Show Statistics</button>
     </div>
+</div>
 
-    <div class="jumbotron">
+   @* <div class="jumbotron d - none">
         <div class="row">
             <h2 class="col-md-4 text-center">
                 @Model.TotalTeams Teams
@@ -79,20 +83,28 @@
                 @Model.TotalSumPlayers SumPlayers
             </h2>
         </div>
+    </div>*@
+
+    <div class="jumbotron d-none" id="statistics">
+    <div class="row">
+        <h2 class="col-md-4 text-center" id="total-teams"></h2>
+        <h2 class="col-md-4 text-center" id="total-users"></h2>
+        <h2 class="col-md-4 text-center" id="total-sum"></h2>
     </div>
+</div>
 
 
-@*    @section Scripts {
+    @section Scripts {
     <script>
         $('#statistics-button').on('click', ev => {
             $.get('/api/statistics', (data) => {
-                $('#total-cars').text(data.totalPlayers + " Players");
+                $('#total-teams').text(data.totalTeams + " Teams");
                 $('#total-users').text(data.totalUsers + " Users");
-                $('#total-rents').text(data.totalPlayerSum + " PlayerSum");
+                //$('#total-sum').text(data.totalTeamSum + " TeamSum");
 
                 $('#statistics').removeClass('d-none');
                 $('#statistics-button').hide();
             });
         });
     </script>
-}*@
+}
