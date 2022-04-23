@@ -67,9 +67,10 @@
             .Select(c => new CityDetailsServiceModel
             {
                 Id = c.Id,
+                Name = c.Name,
                 PostCode = c.PostCode,
                 Image = c.Image,
-                Description = c.Desctription,
+                Description = c.Description,
                 //TeamName = c.Team.Name
                 //UserId = c.TeamCities
             })
@@ -86,7 +87,7 @@
                 Name = name,
                 PostCode = postCode,
                 Image = image,
-                Desctription = description,
+                Description = description,
                 IsPublic = false
             };
 
@@ -113,7 +114,7 @@
             cityData.Name = name;
             cityData.PostCode = postCode;
             cityData.Image = image;
-            cityData.Desctription = description;
+            cityData.Description = description;
             cityData.IsPublic = isPublic;
 
             this.data.SaveChanges();
@@ -143,7 +144,7 @@
                Name = c.Name,
                PostCode = c.PostCode,
                Image = c.Image,
-               Desctription = c.Desctription,
+               Description = c.Description,
                IsPublic = c.IsPublic
            })
            .ToList();
@@ -191,16 +192,6 @@
             this.data.SaveChanges();
 
             return id;
-        }
-
-        public CityQueryServiceModel All(string team, string searchTerm, CitySorting sorting, int currentPage, int citiesPerPage)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Edit(Guid id, string name, string postCode, string image, string description, Guid teamId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

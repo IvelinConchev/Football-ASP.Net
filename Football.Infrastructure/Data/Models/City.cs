@@ -24,7 +24,7 @@
         public string Image { get; set; }
 
         [Required]
-        public string Desctription { get; set; }
+        public string Description { get; set; }
 
         public bool IsPublic { get; set; }
     }

@@ -12,7 +12,7 @@
 
         public string Image { get; set; }
 
-        public string Desctription { get; set; }
+        public string Description { get; set; }
 
         public string TeamName { get; set; }
 
