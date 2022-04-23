@@ -142,6 +142,8 @@
                 Description = stadium.Description,
                 Capacity = stadium.Capacity,
                 Address = stadium.Address,
+                CityId = stadium.CityId,
+                Cities = this.stadiums.AllCities()
             });
         }
 

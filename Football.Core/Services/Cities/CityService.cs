@@ -70,7 +70,7 @@
                 PostCode = c.PostCode,
                 Image = c.Image,
                 Description = c.Desctription,
-                //TeamName = c.TeamCities.
+                //TeamName = c.Team.Name
                 //UserId = c.TeamCities
             })
             .FirstOrDefault();

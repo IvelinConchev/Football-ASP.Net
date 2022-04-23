@@ -9,7 +9,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title text-center">@city.Name  @city.PostCode</h5>
                     <br />
-                    <a asp-controller="Cities" asp-action="Details" asp-route-id=@city.Id class="btn btn-primary">Виж повече</a>
+                    <a asp-controller="Cities" asp-action="Details" asp-route-id=@city.Id  asp-route-information="@city.GetInformation()" class="btn btn-primary">Виж повече</a> 
                     @if (ViewBag.AllowCityEdit == true || User.IsAdmin())
                     {
                         <a asp-controller="Cities" asp-action="Edit" asp-route-id="@city.Id" class="btn btn-warning">Edit</a>

@@ -77,7 +77,7 @@
         {
             public const int CityNameMinLength = 3;
             public const int CityNameMaxLength = 100;
-            public const int CityPostCodeMinLength = 5;
+            public const int CityPostCodeMinLength = 3;
             public const int CityPostCodeMaxLength = 10;
             public const int CityDescriptionMinLength = 2;
         }

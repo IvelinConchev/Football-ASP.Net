@@ -12,9 +12,9 @@
                 <select asp-for="Name" class="form-control">
                     <option value="">All</option>
 
-                    @foreach (var team in Model.Names)
+                    @foreach (var city in Model.Names)
                     {
-                        <option value="@team">@team</option>
+                        <option value="@city">@city</option>
                     }
                 </select>
             </div>

@@ -37,9 +37,9 @@
                 <div class="form-group">
                     <label asp-for="CityId"></label>
                     <select asp-for="CityId" class="form-control">
-                        @foreach (var position in Model.Cities)
+                        @foreach (var city in Model.Cities)
                         {
-                            <option value="@position.Id">@position.Name</option>
+                            <option value="@city.Id">@city.Name</option>
                         }
                     </select>
                     <span asp-validation-for="CityId" class="small text-danger"></span>
