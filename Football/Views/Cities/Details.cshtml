@@ -1,5 +1,48 @@
 ﻿@model CityDetailsServiceModel
 
-<div class="col-md-6 offset-3">
+@{
+    ViewData["Title"] = "Cities";
+}
+
+@*<div class="col-md-6 offset-3">
     <h2>@Model.Name</h2>
+</div>*@
+
+<div class="col-md-6 offset-3">
+@*<div class="card" style="width: 18rem; table-striped">*@
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">@Model.Name</li>
+    <div class="text-center">
+  @*<img src="~/img/@Model.Image" class="rounded float-left" alt="50">*@
+</div>
+    @*<li class="list-group-item"><img src="~/img/@Model.Image"></li>*@
+    <li class="list-group-item">@Model.PostCode</li>
+    <li class="list-group-item">@Model.Description</li>
+
+  </ul>
+
+</div>
+
+<div class="col-md-6 offset-3">
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Name</th>
+      <td>Mark</td>
+    </tr>
+    <tr>
+      <th scope="row">Image</th>
+      <td>Jacob</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+    </tr>
+  </tbody>
+</table>
 </div>
