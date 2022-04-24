@@ -1,0 +1,64 @@
+﻿@model Football.Models.GeoLocation.GeoLocationViewModel
+@{
+    ViewData["Title"] = "Geo Location";
+}
+
+<h1>Geo Location</h1>
+
+<ul>
+    <li>
+       Ip: @Model.Ip
+    </li>
+    <li>
+        Type: @Model.Type
+    </li>
+    <li>
+        Continent Code: @Model.ContinentCode
+    </li>
+    <li>
+        Continent Name: @Model.ContinentName
+    </li>
+    <li>
+        Country Code: @Model.CountryCode
+    </li>
+    <li>
+        Country Name: @Model.CountryName
+    </li>
+    <li>
+        Region Name: @Model.RegionName
+    </li>
+    <li>
+        Region Code: @Model.RegionCode
+    </li>
+    <li>
+        City: @Model.City
+    </li>
+    <li>
+        Latitude: @Model.Latitude
+    </li>
+    <li>
+        Longitude: @Model.Longitude
+    </li>
+    @*<li>
+        Location: @Model.Location
+    </li>*@
+    <li>
+        Capital: @Model.Capital
+    </li>
+    <li>
+        Zip Code: @Model.Zip
+    </li>
+    @*<li>
+        Name: @Model.Name
+    </li>*@
+    @*<li>
+        CountryFlag: @Model.CountryFlag
+    </li>*@
+    <li>
+        Country Flag Emoji: @Model.CountryFlagEmoji
+    </li>
+    <li>
+        CallingCode: @Model.CallingCode
+    </li>
+</ul>
+
