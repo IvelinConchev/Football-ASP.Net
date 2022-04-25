@@ -1,5 +1,44 @@
 ﻿@model TeamDetailsServiceModel
 
+@{
+    ViewData["Title"] = "Отбор";
+}
+
 <div class="col-md-6 offset-3">
-    <h2>@Model.Name @Model.NickName</h2>
+
+    <img src="~/img/@Model.Image" width="300" height="200>
+
+"></h2>
+
+    @*<h2><a href="#" class="text-primary">Primary link</a></h2>*@
+</div>
+<br />
+
+
+<div class="col-md-6 offset-3">
+
+    <td><h3></h3>Име:</td>
+              <h2 class="list-group-item"> @Model.Name</h2>
+    <td><h3></h3>Сайт:</td>
+                <h2><a href="@Model.WebSite" class="list-group-item">@Model.WebSite</a></h2>
+    <td><h3></h3>Лого:</td>
+                <h2 class="list-group-item"> @Model.LogoUrl</h2>
+    <td><h3></h3>Домакин екип:</td>
+                <h2 class="list-group-item"> @Model.HomeKit</h2>
+    <td><h3></h3>Гост екип:</td>
+                <h2 class="list-group-item"> @Model.AwayKit</h2>
+    <td><h3></h3>Прякор:</td>
+                <h2 class="list-group-item"> @Model.NickName</h2>
+    <td><h3></h3>Адрес:</td>
+                <h2 class="list-group-item"> @Model.Address</h2>
+    <td><h3></h3>Треньор:</td>
+                <h2 class="list-group-item"> @Model.HeadCoach</h2>
+    <td><h3></h3>Шампион:</td>
+                <h2 class="list-group-item"> @Model.Champion</h2>
+    <td><h3></h3>Купа:</td>
+                <h2 class="list-group-item"> @Model.Description</h2>
+    <td><h3></h3>Победи:</td>
+                <h2 class="list-group-item"> @Model.Defeats</h2>
+    <td><h3></h3>Описание:</td>
+                <h2 class="list-group-item"> @Model.Description</h2>
 </div>

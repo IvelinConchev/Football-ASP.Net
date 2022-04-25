@@ -1,6 +1,43 @@
 ﻿@model PlayerDetailsServiceModel
 
+@{
+    ViewData["Title"] = "Футболист";
+}
+
 <div class="col-md-6 offset-3">
-    <h2>@Model.FirstName @Model.MiddleName</h2>
-    <h2>@Model.LastName</h2>
+
+    <img src="~/img/@Model.Image" width="300" height="200>
+
+"></h2>
+
+    @*<h2><a href="#" class="text-primary">Primary link</a></h2>*@
 </div>
+<br />
+
+
+<div class="col-md-6 offset-3">
+
+    <td><h3></h3>Име:</td>
+              <h2 class="list-group-item"> @Model.FirstName</h2>
+    <td><h3></h3>Презиме:</td>
+                <h2 class="list-group-item"> @Model.MiddleName</h2>
+    <td><h3></h3>Фамилия:</td>
+                <h2 class="list-group-item"> @Model.LastName</h2>
+    <td><h3></h3>Отбор:</td>
+                <h2 class="list-group-item"> @Model.Team</h2>
+    <td><h3></h3>Години:</td>
+                <h2 class="list-group-item"> @Model.Age</h2>
+    <td><h3></h3>Килограми:</td>
+                <h2 class="list-group-item"> @Model.Weight</h2>
+    <td><h3></h3>Височина:</td>
+                <h2 class="list-group-item"> @Model.Height</h2>
+    <td><h3></h3>Голове:</td>
+                <h2 class="list-group-item"> @Model.Goal</h2>
+    <td><h3></h3>Номер:</td>
+                <h2 class="list-group-item"> @Model.ShirtNumber</h2>
+    <td><h3></h3>Националност:</td>
+                <h2 class="list-group-item"> @Model.Nationality</h2>
+    <td><h3></h3>Описание:</td>
+                <h2 class="list-group-item"> @Model.Description</h2>
+</div>
+

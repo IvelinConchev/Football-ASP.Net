@@ -1,5 +1,26 @@
 ﻿@model LeagueDetailsServiceModel
 
+@{
+    ViewData["Title"] = "Лига";
+}
+
+
+
 <div class="col-md-6 offset-3">
-    <h2>@Model.Name</h2>
+
+    <img src="~/img/@Model.Image" width="300" height="200>
+
+"></h2>
+
+    @*<h2><a href="#" class="text-primary">Primary link</a></h2>*@
+</div>
+<br />
+
+
+<div class="col-md-6 offset-3">
+
+    <td><h3></h3>Лига:</td>
+              <h2 class="list-group-item"> @Model.Name</h2>
+    <td><h3></h3>Описание:</td>
+                <h2 class="list-group-item"> @Model.Description</h2>
 </div>
