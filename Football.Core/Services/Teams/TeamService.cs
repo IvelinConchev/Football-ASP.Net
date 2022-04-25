@@ -88,6 +88,7 @@
             {
                 Id = t.Id,
                 Name = t.Name,
+                WebSite = t.WebSite,
                 Address = t.Address,
                 AwayKit = t.AwayKit,
                 HomeKit = t.HomeKit,
