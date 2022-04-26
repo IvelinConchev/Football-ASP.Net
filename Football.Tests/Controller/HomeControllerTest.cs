@@ -1,6 +1,7 @@
 ﻿namespace Football.Tests.Controller
 {
     using Football.Controllers;
+    //using Football.Controllers;
     using Football.Core.Services.Statistics;
     using Football.Core.Services.Teams;
     using Football.Infrastructure.Data.Models;
@@ -24,9 +25,9 @@
             var statisticsService = new StatisticsService(data);
             //var cache = new MemoryCache(List<LatestTeamServiceModel>> (latestTeamCacheKey);
 
-             data.Teams.Add(new Team { Address = "p", AwayKit = "t", Champion = 1, Cup = 1, Defeats = 12, Description = "2412134", HeadCoach = "rqr", HomeKit = "fewfef", Image = "dffdfd", Name = "efwfw", NickName = "ffdfd", LogoUrl = "jklfkd",  WebSite = "", Win = 4});
+            data.Teams.Add(new Team { Address = "p", AwayKit = "t", Champion = 1, Cup = 1, Defeats = 12, Description = "2412134", HeadCoach = "rqr", HomeKit = "fewfef", Image = "dffdfd", Name = "efwfw", NickName = "ffdfd", LogoUrl = "jklfkd", WebSite = "", Win = 4 });
 
-            
+
             //data.Teams.AddRange(Enumerable.Range(0, 10).Select(i => new Team()));
             data.SaveChanges();
 

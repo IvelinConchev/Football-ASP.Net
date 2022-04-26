@@ -17,13 +17,13 @@
 
         private readonly ILogger<HomeController> _logger;
         public HomeController(
-            ILogger<HomeController> logger,
+            //ILogger<HomeController> logger,
             ITeamService _teams,
             IStatisticsService _statistics,
             IMemoryCache _cache)
         {
             this.teams = _teams;
-            _logger = logger;
+            //_logger = logger;
             this.statistics = _statistics;
             this.cache = _cache;
         }
