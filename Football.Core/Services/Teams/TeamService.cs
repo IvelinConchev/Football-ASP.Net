@@ -202,7 +202,6 @@
         public IEnumerable<TeamServiceModel> ByUser(string userId)
         => GetTeams(this.data
             .Teams
-             //.Where(t => t.Player.Manager.UserId == userId));
              .Where(t => t.Player.Manager.UserId == userId));
 
         public bool IsByManager(Guid teamId, Guid managerId)

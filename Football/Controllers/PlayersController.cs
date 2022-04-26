@@ -165,7 +165,6 @@
 
         [HttpPost]
         [Authorize]
-
         public IActionResult Edit(Guid id, PlayerFormModel player)
         {
             var managerId = this.managers.IdByUser(this.User.Id());
@@ -214,6 +213,22 @@
             TempData[GlobalMessageKey] = $"You Team was edited {(this.User.IsAdmin() ? string.Empty : " and is await for approval!")}";
 
             return RedirectToAction(nameof(Details), new { id, information = player.GetInformation() });
+        }
+
+
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            if (id.Equals(Guid.Empty))
+            {
+                return NotFound();
+            }
+
+            var delete = this.players.Delete(id);
+
+            TempData[DangerMessageKey] = $"You Player was deleted!";
+
+            return RedirectToAction(nameof(All));
         }
 
         private string UploadFile(PlayerFormModel model)

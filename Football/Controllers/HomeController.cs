@@ -15,7 +15,7 @@
         private readonly IStatisticsService statistics;
         private readonly IMemoryCache cache;
 
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
         public HomeController(
             //ILogger<HomeController> logger,
             ITeamService _teams,

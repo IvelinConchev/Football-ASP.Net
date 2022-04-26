@@ -200,6 +200,22 @@
             return RedirectToAction(nameof(Details), new { id, information = stadium.GetInformation() });
         }
 
+
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            if (id.Equals(Guid.Empty))
+            {
+                return NotFound();
+            }
+
+            var delete = this.stadiums.Delete(id);
+
+            TempData[DangerMessageKey] = $"You Stadium was deleted!";
+
+            return RedirectToAction(nameof(All));
+        }
+
         private string UploadFile(StadiumFormModel model)
         {
             string fileName = null;

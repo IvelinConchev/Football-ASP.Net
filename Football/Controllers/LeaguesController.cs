@@ -192,6 +192,22 @@
             return RedirectToAction(nameof(Details), new { id, information = league.GetInformation() });
         }
 
+
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            if (id.Equals(Guid.Empty))
+            {
+                return NotFound();
+            }
+
+            var delete = this.leagues.Delete(id);
+
+            TempData[DangerMessageKey] = $"You League was deleted!";
+
+            return RedirectToAction(nameof(All));
+        }
+
         private string UploadFile(LeagueFormModel model)
         {
             string fileName = null;

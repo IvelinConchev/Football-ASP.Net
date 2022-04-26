@@ -203,6 +203,23 @@
 
             return RedirectToAction(nameof(Details), new { id, information = city.GetInformation() });
         }
+
+
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            if (id.Equals(Guid.Empty))
+            {
+                return NotFound();
+            }
+
+            var delete = this.cities.Delete(id);
+
+            TempData[DangerMessageKey] = $"You City was deleted!";
+
+            return RedirectToAction(nameof(All));
+        }
+
         private string UploadFile(CityFormModel model)
         {
             string fileName = null;
