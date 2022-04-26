@@ -11,16 +11,17 @@
 
     public class CityFormModel : ICityModel
     {
-        [Display(Name = "City Name")]
+        [Display(Name = "Име")]
         [Required]
         [StringLength(CityNameMaxLength, MinimumLength = CityNameMinLength, ErrorMessage = "Minimum: {2}, Maximum: {1}")]
         public string Name { get; set; }
 
-        [Display(Name = "Post Code")]
+        [Display(Name = "Пощенски код")]
         [Required]
         [StringLength(CityPostCodeMaxLength, MinimumLength = CityPostCodeMinLength, ErrorMessage = "Minimum: {2}, Maximum: {1}")]
         public string PostCode { get; set; }
 
+        [Display(Name = "Снимка")]
         public IFormFile Image { get; set; }
 
         [Display(Name = "Описание")]
