@@ -90,7 +90,7 @@
     <select asp-for="PlayerId" class="form-control"> 
                     @foreach (var player in Model.Players)
                     {
-              <option value="@player.Id">@player.Name</option>
+              <option value="@player.Id">@player.FirstName @player.LastName @player.Name</option>
                     }
     </select>
     <span asp-validation-for="PlayerId" class="small text-danger"></span>

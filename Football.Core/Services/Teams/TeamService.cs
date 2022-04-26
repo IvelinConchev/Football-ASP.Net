@@ -222,6 +222,8 @@
             {
                 Id = p.Id,
                 Name = p.Team,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
             });
 
 

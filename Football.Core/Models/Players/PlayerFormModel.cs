@@ -42,7 +42,7 @@
         [Display(Name = "Височина")]
         public double Height { get; init; }
 
-        [Display(Name = "Image")]
+        [Display(Name = "Снимка")]
         [Required]
         public IFormFile Image { get; init; }
 
