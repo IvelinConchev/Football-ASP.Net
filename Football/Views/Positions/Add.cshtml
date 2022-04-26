@@ -11,9 +11,13 @@
                     <span asp-validation-for="Name" class="small text-danger"></span>
                 </div>
                 <input class="btn btn-primary" type="submit" value="Save" />
-                <input class="btn btn-danger" type="submit" value="Edit" />
-                 <a asp-controller="Positions" asp-action="Edit" asp-route-id="Id" class="btn btn-warning">Edit</a>
+                <input class="btn btn-warning" type="submit" value="Edit" />
+                 <a asp-controller="Positions" asp-action="Delete" asp-route-id="Id" class="btn btn-danger">Delete</a>
             </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

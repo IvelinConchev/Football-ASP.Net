@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Football.Core", "Football.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Football.Infrastructure", "Football.Infrastructure\Football.Infrastructure.csproj", "{391D6016-299D-4571-BB8A-74974ADA51A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Football.Test", "Football.Test\Football.Test.csproj", "{459FBA7F-7A4B-4F84-AA1F-1973177365B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Football.Test", "Football.Test\Football.Test.csproj", "{459FBA7F-7A4B-4F84-AA1F-1973177365B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Football.Tests", "Football.Tests\Football.Tests.csproj", "{197F972D-6CE0-4826-A6A1-F0C456AFF7B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{459FBA7F-7A4B-4F84-AA1F-1973177365B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{459FBA7F-7A4B-4F84-AA1F-1973177365B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{459FBA7F-7A4B-4F84-AA1F-1973177365B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{197F972D-6CE0-4826-A6A1-F0C456AFF7B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{197F972D-6CE0-4826-A6A1-F0C456AFF7B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{197F972D-6CE0-4826-A6A1-F0C456AFF7B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{197F972D-6CE0-4826-A6A1-F0C456AFF7B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
