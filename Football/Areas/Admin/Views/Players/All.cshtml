@@ -15,11 +15,11 @@
     <thead class="thead-dark">
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">NickName</th>
-            <th scope="col">Champion</th>
-            <th scope="col">Player</th>
-            <th scope="col">Approved</th>
+            <th scope="col">Име</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Години</th>
+            <th scope="col">Отбор</th>
+            <th scope="col">Одобрен</th>
             <th scope="col"></th>
         </tr>
     </thead>
@@ -31,11 +31,12 @@
                 <td scope="col">@player.FirstName</td>
                 <td scope="col">@player.LastName</td>
                 <td scope="col">@player.Age</td>
-                <td scope="col">@(player.IsPublic ? "Yes" : "No")</td> 
+                <td scope="col">@player.Team</td>
+                <td scope="col">@(player.IsPublic ? "Да" : "Не")</td> 
                 <td scope="col">
                     <a asp-area="" asp-controller="Players" asp-action="Delete" asp-route-id="@player.Id" class="btn btn-danger float-right ml-3">Delete</a>
                     <a asp-area="" asp-controller="Players" asp-action="Edit" asp-route-id="@player.Id" class="btn btn-warning float-right ml-3">Edit</a>
-                    <a asp-area="Admin" asp-controller="Players" asp-action="ChangeVisibility" asp-route-id="@player.Id" class="btn btn-info float-right ml-3">@(player.IsPublic ? "Hide" : "Show")</a>
+                    <a asp-area="Admin" asp-controller="Players" asp-action="ChangeVisibility" asp-route-id="@player.Id" class="btn btn-info float-right ml-3">@(player.IsPublic ? "Скрий" : "Покажи")</a>
                     <a asp-area="" asp-controller="Players" asp-action="Details" asp-route-id=@player.Id asp-route-information="@player.GetInformation()" class="btn btn-primary float-right ml-3">Виж</a>
                 </td>
             </tr>

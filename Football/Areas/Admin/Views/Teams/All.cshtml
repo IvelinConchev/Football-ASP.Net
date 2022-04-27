@@ -15,11 +15,11 @@
     <thead class="thead-dark">
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">NickName</th>
-            <th scope="col">Champion</th>
-            <th scope="col">Player</th>
-            <th scope="col">Approved</th>
+            <th scope="col">Име</th>
+            <th scope="col">Прякор</th>
+            <th scope="col">Шампион</th>
+            <th scope="col">Футболист</th>
+            <th scope="col">Одобрен</th>
             <th scope="col"></th>
         </tr>
     </thead>
@@ -32,15 +32,15 @@
                 <td scope="col">@team.NickName</td>
                 <td scope="col">@team.Champion</td>
                 <td scope="col">@team.PlayerName</td>
-                <td scope="col">@(team.IsPublic ? "Yes" : "No")</td> 
+                <td scope="col">@(team.IsPublic ? "Да" : "Не")</td> 
                 <td scope="col">
                     <a asp-area="" asp-controller="Teams" asp-action="Delete" asp-route-id="@team.Id" class="btn btn-danger float-right ml-3">Delete</a>
                     <a asp-area="" asp-controller="Teams" asp-action="Edit" asp-route-id="@team.Id" class="btn btn-warning float-right ml-3">Edit</a>
-                    <a asp-area="Admin" asp-controller="Teams" asp-action="ChangeVisibility" asp-route-id="@team.Id" class="btn btn-info float-right ml-3">@(team.IsPublic ? "Hide" : "Show")</a>
+                    <a asp-area="Admin" asp-controller="Teams" asp-action="ChangeVisibility" asp-route-id="@team.Id" class="btn btn-info float-right ml-3">@(team.IsPublic ? "Скрий" : "Покажи")</a>
                     <a asp-area="" asp-controller="Teams" asp-action="Details" asp-route-id=@team.Id asp-route-information="@team.GetInformation()" class="btn btn-primary float-right ml-3">Виж</a>
 
 
-                    <div class="card-footer">
+                   @* <div class="card-footer">
     <form method="post" asp-area="" asp-controller="Teams" asp-action="Delete" asp-route-id="@team.Id">
         <a asp-area="" asp-controller="Teams" asp-action="Edit"
             asp-route-id="@team.Id" class="btn btn-primary">Edit</a>
@@ -57,7 +57,7 @@
                 onclick="confirmDelete('@team.Id', true)">Delete</a>
         </span>
     </form>
-</div>
+</div>*@
                 </td>
             </tr>
         }
