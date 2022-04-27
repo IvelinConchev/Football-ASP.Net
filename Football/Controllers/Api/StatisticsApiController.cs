@@ -1,32 +1,20 @@
 ﻿namespace Football.Controllers.Api
 {
-    using Football.Infrastructure.Data;
-    using Football.Models.Api.Statistics;
+    using Football.Core.Contracts;
+    using Football.Core.Services.Statistics.Models;
     using Microsoft.AspNetCore.Mvc;
-    using System.Linq;
 
     [ApiController]
     [Route("api/statistics")]
     public class StatisticsApiController : ControllerBase
     {
-        private readonly FootballDbContext data;
+        private readonly IStatisticsService statistics;
 
-        public StatisticsApiController(FootballDbContext data)
-            => this.data = data;
+        public StatisticsApiController(IStatisticsService statistics)
+            => this.statistics = statistics;
 
         [HttpGet]
-        public StatisticsResponseModel GetStatistics()
-        {
-            var totalTeams = this.data.Teams.Count();
-            var totalUsers = this.data.Users.Count();
-
-
-            return new StatisticsResponseModel
-            {
-                TotalTeams = totalTeams,
-                TotalUsers = totalUsers,
-                SumTeams = 0
-            };
-        }
+        public StatisticsServiceModel GetStatistics()
+            => this.statistics.Total();
     }
 }
