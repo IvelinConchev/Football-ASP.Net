@@ -7,6 +7,6 @@
 
         public int TotalUsers { get; init; }
 
-        public int SumPlayers{ get; init; }
+        public int SumTeams{ get; init; }
     }
 }

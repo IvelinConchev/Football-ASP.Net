@@ -28,34 +28,34 @@
                 @if (User.IsInRole(DataConstants.Roles.RoleNameAdministrator) || (User.IsInRole(DataConstants.Roles.RoleNameManager)))
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Positions" asp-action="Add">Добавяне на Позиция</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Positions" asp-action="Add">Добавяне позиция</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Add">Добавяне на футболист</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Add">Добавяне футболист</a>
                     </li>
                       <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="All">Футболисти</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="Add">Добавяне на отбор</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="Add">Добавяне отбор</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="All">Отбори</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="Add">Добавяне на град</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="Add">Добавяне град</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="All">Градове</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Leagues" asp-action="Add">Добавяне на лига</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Leagues" asp-action="Add">Добавяне лига</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Leagues" asp-action="All">Лиги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="Add">Добавяне на стадион</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="Add">Добавяне стадион</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="All">Стадиони</a>
@@ -202,15 +202,15 @@
         <!-- Main Footer -->
         <footer class="main-footer">
              <a class="nav-link text-dark" asp-area="" asp-controller="Geo" asp-action="Details">Geo Location</a>
-             <a class="nav-link text-dark" asp-area="/" asp-controller="" asp-action="">За нас</a>
-             <a class="nav-link text-dark" asp-area="/" asp-controller="" asp-action="">Контакти</a>
-             <a class="nav-link text-dark" asp-area="/" asp-controller="" asp-action="">Екип</a>
+             <a class="nav-link text-dark" asp-area="" asp-controller="Footers" asp-action="Index">За нас</a>
+             <a class="nav-link text-dark" asp-area="" asp-controller="Footers" asp-action="Contact">Контакти</a>
+             <a class="nav-link text-dark" asp-area="" asp-controller="Footers" asp-action="TheTeam">Екип</a>
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
                @* Anything you want*@
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2014 - @DateTime.Now.Year<a href="/">My Football</a>.</strong> @*All rights reserved.*@
+            <strong>Copyright &copy; 2014 - @DateTime.Now.Year<a href="/"> My Football</a>.</strong> @*All rights reserved.*@
         </footer>
     </div>
     <!-- ./wrapper -->

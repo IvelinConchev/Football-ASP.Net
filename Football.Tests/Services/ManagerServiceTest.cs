@@ -13,13 +13,15 @@
     public class ManagerServiceTest
     {
         [Fact]
-        public void IsDealerShouldReturnTrueWhenUserIsManager()
+        public void IsManagerShouldReturnTrueWhenUserIsManager()
         {
             //Arrange
             const string userId = "TestUserId";
+            const string name = "Petar Mihov";
+            const string phoneNumber = "+359888888888";
             using var data = DatabaseMock.Instance;
 
-            data.Managers.Add(new Manager { UserId = userId, Name = "09009", PhoneNumber="89070" });
+            data.Managers.Add(new Manager { UserId = userId, Name = name, PhoneNumber = phoneNumber });
             data.SaveChanges();
 
             var managerService = new ManagerService(data);
@@ -29,44 +31,6 @@
 
             //Assert
             Assert.True(result);
-        }
-
-        [Fact]
-        public void IsDealerShouldReturnTrueWhenUserIsNotManager()
-        {
-            //Arrange
-            const string userId = "TestUserId";
-            using var data = DatabaseMock.Instance;
-
-            data.Managers.Add(new Manager { UserId = userId, Name = "09009", PhoneNumber = "89070" });
-            data.SaveChanges();
-
-            var managerService = new ManagerService(data);
-
-            //Act
-            var result = managerService.IsManager("AnotherUserId");
-
-            //Assert
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void IsDealerShouldReturnTrueWhenUserIsIdByUserNotUser()
-        {
-            //Arrange
-            const string userId = "TestUserId";
-            using var data = DatabaseMock.Instance;
-
-            data.Managers.Add(new Manager { UserId = userId, Name = "jj", PhoneNumber = "444"});
-            data.SaveChanges();
-
-            var managerService = new ManagerService(data);
-
-            //Act
-            var result = managerService.IdByUser(userId);
-
-            //Assert
-            Assert.False(false);
         }
     }
 }

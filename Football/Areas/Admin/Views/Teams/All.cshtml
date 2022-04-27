@@ -18,7 +18,6 @@
             <th scope="col">Име</th>
             <th scope="col">Прякор</th>
             <th scope="col">Шампион</th>
-            <th scope="col">Футболист</th>
             <th scope="col">Одобрен</th>
             <th scope="col"></th>
         </tr>
@@ -31,7 +30,6 @@
                 <td scope="col">@team.Name</td>
                 <td scope="col">@team.NickName</td>
                 <td scope="col">@team.Champion</td>
-                <td scope="col">@team.PlayerName</td>
                 <td scope="col">@(team.IsPublic ? "Да" : "Не")</td> 
                 <td scope="col">
                     <a asp-area="" asp-controller="Teams" asp-action="Delete" asp-route-id="@team.Id" class="btn btn-danger float-right ml-3">Delete</a>

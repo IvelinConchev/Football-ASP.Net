@@ -4,7 +4,7 @@
     using Football.Core.Services.Statistics.Models;
     using Moq;
 
-    public class StatisticsServiceMock
+    public static class StatisticsServiceMock
     {
         public static IStatisticsService Instance
         {
@@ -16,9 +16,10 @@
                     .Setup(s => s.Total())
                     .Returns(new StatisticsServiceModel
                     {
-                        TotalTeams = 5,
-                        TotalUsers = 10
+                        TotalUsers = 5,
+                        TotalTeams = 10
                     });
+
                 return statisticsServiceMock.Object;
             }
         }
