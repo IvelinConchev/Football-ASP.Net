@@ -10,7 +10,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title text-center">@league.Name</h5>
                     <br />
-                    <a asp-controller="Leagues" asp-action="Details" asp-route-id=@league.Id  asp-route-information="@league.GetInformation()" class="btn btn-primary">Виж повече</a>
+                    <a asp-controller="Leagues" asp-action="Details" asp-route-id=@league.Id  asp-route-information="@league.GetInformation()" class="btn btn-primary">Виж</a>
                     @if (ViewBag.AllowLeagueEdit == true || User.IsAdmin())
                     {
                         <a asp-controller="Leagues" asp-action="Edit" asp-route-id="@league.Id" class="btn btn-warning">Edit</a>

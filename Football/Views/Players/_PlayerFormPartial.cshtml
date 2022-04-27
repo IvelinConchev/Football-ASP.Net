@@ -3,29 +3,29 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-            <h2 class="heading-margin text-center">Add Player</h2>
+            <h2 class="heading-margin text-center">@ViewBag.Title</h2>
               <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="FirstName"></label>
-                    <input asp-for="FirstName" class="form-control" placeholder="Hristo, Leonel, etc...">
+                    <input asp-for="FirstName" class="form-control" placeholder="Христо, Димитър, и т.н...">
                     <span asp-validation-for="FirstName" class="small text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="MiddleName"></label>
-                    <input asp-for="MiddleName" class="form-control" placeholder="Stoichkov, Dimitrov, etc...">
+                    <input asp-for="MiddleName" class="form-control" placeholder="Стоичков, Димитров, и т.н...">
                      <span asp-validation-for="MiddleName" class="small text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="LastName"></label>
-                    <input asp-for="LastName" class="form-control" placeholder="Stoichkov, Messi, etc...">
+                    <input asp-for="LastName" class="form-control" placeholder="Стоичков, Димитров, и т.н...">
                      <span asp-validation-for="LastName" class="small text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="Team"></label>
-                    <input asp-for="Team" class="form-control" placeholder="Stoichkov, Messi, etc...">
+                    <input asp-for="Team" class="form-control" placeholder="Левски, Берое, ЦСКА и т.н....">
                      <span asp-validation-for="Team" class="small text-danger"></span>
                 </div>
 
@@ -58,19 +58,19 @@
 
                 <div class="form-group">
                     <label asp-for="ShirtNumber"></label>
-                    <input asp-for="ShirtNumber" class="form-control" placeholder="From 1 to 99">
+                    <input asp-for="ShirtNumber" class="form-control" placeholder="От 1 до 99">
                      <span asp-validation-for="ShirtNumber" class="small text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="Nationality"></label>
-                    <input asp-for="Nationality" class="form-control" placeholder="Bulgarian, American, etc...">
+                    <input asp-for="Nationality" class="form-control" placeholder="Българин, Американец и т.н....">
                      <span asp-validation-for="Nationality" class="small text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="Description"></label>
-                    <textarea asp-for="Description" rows="4" class="form-control" placeholder="This is the big football."></textarea>
+                    <textarea asp-for="Description" rows="4" class="form-control" placeholder="Това е добър футболист."></textarea>
                      <span asp-validation-for="Description" class="small text-danger"></span>
                 </div>
                 <div class="form-group">
