@@ -22,7 +22,7 @@
 
         <div class="form-group col-md-4">
             <label asp-for="SearchTerm"></label>
-            <input asp-for="SearchTerm" class="form-control" placeholder="Ivan Petkov Mihov...">
+            <input asp-for="SearchTerm" class="form-control" placeholder="Георги Аспарухов, Българска армия и т. н....">
         </div>
 
         <div class="form-group col-md-4">
@@ -73,7 +73,7 @@
 
         @if (!Model.Stadiums.Any())
     {
-        <h2 class="text-center">No stadiums found by the given criteria! </h2>
+        <h2 class="text-center">Няма намерени стадиони по зададените критерии!</h2>
     }
 
     <partial name="_StadiumsPartial" model="@Model.Stadiums" />

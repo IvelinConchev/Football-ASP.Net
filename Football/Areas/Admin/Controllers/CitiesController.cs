@@ -12,7 +12,7 @@
             this.cities = _cities;
         }
 
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
             var cities =
                 this.cities
