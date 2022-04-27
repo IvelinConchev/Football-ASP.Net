@@ -28,37 +28,37 @@
                 @if (User.IsInRole(DataConstants.Roles.RoleNameAdministrator) || (User.IsInRole(DataConstants.Roles.RoleNameManager)))
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Positions" asp-action="Add">Add Position</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Positions" asp-action="Add">Добавяне на Позиция</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Add">Add Player</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Add">Добавяне на футболист</a>
                     </li>
                       <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="All">All Players</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="All">Футболисти</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="Add">Add Teams</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="Add">Добавяне на отбор</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="All">All Teams</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="All">Отбори</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="Add">Add City</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="Add">Добавяне на град</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="All">All Cities</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="All">Градове</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Leagues" asp-action="Add">Add League</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Leagues" asp-action="Add">Добавяне на лига</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Leagues" asp-action="All">All Leagues</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Leagues" asp-action="All">Лиги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="Add">Add Stadium</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="Add">Добавяне на стадион</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="All">All Stadiums</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="All">Стадиони</a>
                 </li>
                 }
                 else
@@ -70,19 +70,19 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Add">Add Player</a>
                     </li>*@
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="All">All Players</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="All">Футболисти</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="All">All Teams</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="All">Отбори</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="All">All Cities</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Cities" asp-action="All">Градове</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Leagues" asp-action="All">All Leagues</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Leagues" asp-action="All">Лиги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="All">All Stadiums</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Stadiums" asp-action="All">Стадиони</a>
                 </li>
                 }
             </ul>
@@ -92,7 +92,7 @@
                 <li class="nav-item">
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
                         <i class="fas fa-door-open"></i>
-                        <button type="submit" class="nav-link btn btn-link text-dark">Log Out</button>
+                        <button type="submit" class="nav-link btn btn-link text-dark">Изход</button>
                     </form>
                 </li>
                 <li class="nav-item">
@@ -136,19 +136,19 @@
                                 @if (User.IsAdmin())
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Players" asp-action="All">AdministrationPlayers</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Players" asp-action="All">Administration Players</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Teams" asp-action="All">AdministrationTeams</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Teams" asp-action="All">Administration Teams</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Cities" asp-action="All">AdministrationCities</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Cities" asp-action="All">Administration Cities</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Leagues" asp-action="All">AdministrationLeagues</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Leagues" asp-action="All">Administration Leagues</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Stadiums" asp-action="All">AdministrationStadiums</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Stadiums" asp-action="All">Administration Stadiums</a>
                             </li>
                         }
                         @*<li class="nav-item">

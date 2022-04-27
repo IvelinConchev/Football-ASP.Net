@@ -45,7 +45,6 @@
         }
 
         [Authorize]
-
         public IActionResult Mine()
         {
             var myCities = this.cities.ByUser(this.User.Id());
@@ -66,7 +65,6 @@
         }
 
         [Authorize]
-
         public IActionResult Add()
         {
             if (!this.managers.IsManager(this.User.Id()))
@@ -83,7 +81,6 @@
 
         [HttpPost]
         [Authorize]
-
         public IActionResult Add(CityFormModel city)
         {
             var managerId = this.managers.IdByUser(this.User.Id());
@@ -122,7 +119,6 @@
         }
 
         [Authorize]
-
         public IActionResult Edit(Guid id)
         {
             var userId = this.User.Id();
@@ -153,7 +149,6 @@
 
         [HttpPost]
         [Authorize]
-
         public IActionResult Edit(Guid id, CityFormModel city)
         {
             var managerId = this.managers.IdByUser(

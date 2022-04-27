@@ -78,7 +78,6 @@
 
         [HttpPost]
         [Authorize]
-
         public IActionResult Add(StadiumFormModel stadium)
         {
             var managerId = this.managers.IdByUser(this.User.Id());
@@ -118,7 +117,6 @@
         }
 
         [Authorize]
-
         public IActionResult Edit(Guid id)
         {
             var userId = this.User.Id();
@@ -149,7 +147,6 @@
 
         [HttpPost]
         [Authorize]
-
         public IActionResult Edit(Guid id, StadiumFormModel stadium)
         {
             var managerId = this.managers.IdByUser(

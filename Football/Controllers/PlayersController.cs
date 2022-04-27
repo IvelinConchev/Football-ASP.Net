@@ -82,7 +82,6 @@
 
         [HttpPost]
         [Authorize]
-
         public IActionResult Add(PlayerFormModel player)
         {
             var managerId = this.managers.IdByUser(this.User.Id());
@@ -230,7 +229,6 @@
 
             return RedirectToAction(nameof(All));
         }
-
         private string UploadFile(PlayerFormModel model)
         {
             string fileName = null;

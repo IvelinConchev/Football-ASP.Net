@@ -132,7 +132,6 @@
         }
 
         [Authorize]
-
         public IActionResult Edit(Guid id)
         {
             var userId = this.User.Id();

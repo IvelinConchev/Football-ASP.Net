@@ -77,7 +77,6 @@
 
         [HttpPost]
         [Authorize]
-
         public IActionResult Add(LeagueFormModel league)
         {
             var managerId = this.managers.IdByUser(this.User.Id());
@@ -114,7 +113,6 @@
         }
 
         [Authorize]
-
         public IActionResult Edit(Guid id)
         {
             var userId = this.User.Id();
@@ -143,7 +141,6 @@
 
         [HttpPost]
         [Authorize]
-
         public IActionResult Edit(Guid id, LeagueFormModel league)
         {
             var managerId = this.managers.IdByUser(
@@ -191,7 +188,6 @@
 
             return RedirectToAction(nameof(Details), new { id, information = league.GetInformation() });
         }
-
 
         [HttpGet]
         public IActionResult Delete(Guid id)
