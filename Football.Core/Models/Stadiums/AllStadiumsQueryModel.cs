@@ -8,12 +8,14 @@
     {
         public const int StadiumsPerPage = 3;
 
+        [Display(Name = "Стадион")]
         public string Name { get; init; }
 
 
-        [Display(Name = "Search by text")]
+        [Display(Name = "Търсене по дума")]
         public string SearchTerm { get; init; }
 
+        [Display(Name = "Сортиране")]
         public StadiumSorting Sorting { get; init; }
 
         public int CurrentPage { get; init; } = 1;

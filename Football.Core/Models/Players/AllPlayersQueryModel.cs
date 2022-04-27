@@ -8,11 +8,13 @@
     {
         public const int PlayersPerPage = 3;
 
+        [Display(Name = "Играч")]
         public string Team { get; init; }
 
-        [Display(Name = "Search by text")]
+        [Display(Name = "Търсене по дума")]
         public string SearchTerm { get; init; }
 
+        [Display(Name = "Сортиране")]
         public PlayerSorting Sorting { get; init; }
 
         public int CurrentPage { get; init; } = 1;

@@ -7,12 +7,13 @@
     {
         public const int CityPerPage = 3;
 
+        [Display(Name = "Град")]
         public string Name { get; init; }
 
-
-        [Display(Name = "Search by text")]
+        [Display(Name = "Търси по дума")]
         public string SearchTerm { get; init; }
 
+        [Display(Name = "Сортиране")]
         public CitySorting Sorting { get; init; }
 
         public int CurrentPage { get; init; } = 1;

@@ -9,12 +9,13 @@
     {
         public const int TeamPerPage = 3;
 
+        [Display(Name = "Отбор")]
         public string Team { get; init; }
 
-
-        [Display(Name = "Search by text")]
+        [Display(Name = "Търсене по дума")]
         public string SearchTerm { get; init; }
 
+        [Display(Name = "Сортиране")]
         public TeamSorting Sorting { get; init; }
 
         public int CurrentPage { get; init; } = 1;
