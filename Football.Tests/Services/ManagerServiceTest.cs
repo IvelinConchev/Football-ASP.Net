@@ -3,11 +3,6 @@
     using Football.Core.Services.Managers;
     using Football.Infrastructure.Data.Models;
     using Football.Tests.Mock;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class ManagerServiceTest
