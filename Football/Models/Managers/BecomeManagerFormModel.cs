@@ -7,12 +7,13 @@
     public class BecomeManagerFormModel
     {
         [Required]
+        [Display(Name = "Име")]
         [StringLength(ManagerNameMaxLength, MinimumLength = ManagerNameMinLength)]
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Тел. номер")]
         [StringLength(PhoneNumberMaxLength, MinimumLength = PhoneNumberMinLength)]
-        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }
 }

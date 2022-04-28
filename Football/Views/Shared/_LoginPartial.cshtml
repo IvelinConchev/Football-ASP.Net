@@ -1,4 +1,5 @@
 ﻿@using Football.Core.Contracts
+@using Football.Infrastructure.Data
 @using Football.Infrastructure.Data.Identity
 @using Football.Infrastructure.Data.Models
 @using Microsoft.AspNetCore.Identity
@@ -9,13 +10,38 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-            <img src="~/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+    if (User.IsInRole(DataConstants.Roles.RoleNameAdministrator))
+    {
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="~/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">@User.Identity?.Name</a>
+            </div>
         </div>
-        <div class="info">
-            <a href="#" class="d-block">@User.Identity?.Name</a>
+    }
+    else if (User.IsInRole(DataConstants.Roles.RoleNameManager))
+    {
+         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="~/img/avatar3.png" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">@User.Identity?.Name</a>
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="~/img/user8-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">@User.Identity?.Name</a>
+            </div>
+        </div>
+    }
 }
