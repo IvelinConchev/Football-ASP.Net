@@ -10,7 +10,6 @@
     using Football.Core.Services.Statistics;
     using Football.Core.Services.Teams;
     using Football.Infrastructure.Data;
-    using Football.Infrastructure.Data.Models;
     using Football.Infrastructure.Repositories;
     using Football.Services;
     using Microsoft.AspNetCore.Builder;

@@ -1,7 +1,7 @@
 ﻿namespace Football.Tests.Controllers.Api
 {
     using Football.Controllers.Api;
-    using Football.Tests.Mocks;
+    using Football.Tests.Mock;
     using Xunit;
 
     public class StatisticsApiControllerTest

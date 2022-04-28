@@ -1,4 +1,4 @@
-﻿namespace Football.Tests.Mocks
+﻿namespace Football.Tests.Mock
 {
     using Football.Infrastructure.Data;
     using Microsoft.EntityFrameworkCore;
