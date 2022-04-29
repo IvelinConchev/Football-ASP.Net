@@ -31,7 +31,7 @@
             ErrorMessage = "The field Description must be a string with a minimum length of {2}.")]
         public string Description { get; init; }
 
-        [Display(Name = "Team")]
+        [Display(Name = "Отбор")]
         public Guid TeamId { get; init; }
 
         public IEnumerable<CityTeamsServiceModel> Teams { get; set; }

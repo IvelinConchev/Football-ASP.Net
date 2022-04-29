@@ -7,7 +7,7 @@
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="Name"></label>
-                    <input asp-for="Name" class="form-control">
+                    <input asp-for="Name" class="form-control"  placeholder="Берое, Барселона и т.н...">
                     <span asp-validation-for="Name" class="small text-danger"></span>
                 </div>
 
@@ -16,13 +16,13 @@
                     <input asp-for="Image" class="form-control">
                      <span asp-validation-for="Image" class="small text-danger"></span>
                      <br />
-                      @*<input type="file" name="Image" />*@
-            @*<input class="btn btn-primary" type="submit" value="Save" />*@
+                    @*<input type="file" name="Image" />*@
+                    @*<input class="btn btn-primary" type="submit" value="Save" />*@
                 </div>
 
                 <div class="form-group">
                     <label asp-for="WebSite"></label>
-                    <input asp-for="WebSite" class="form-control" placeholder="www.abv.bg...,">
+                    <input asp-for="WebSite" class="form-control" placeholder="www.abv.bg и т.н...,">
                      <span asp-validation-for="WebSite" class="small text-danger"></span>
                 </div>
 
@@ -49,13 +49,13 @@
 
                 <div class="form-group">
                     <label asp-for="Description"></label>
-                    <textarea asp-for="Description" rows="4" class="form-control" placeholder="This is the big football team."></textarea>
+                    <textarea asp-for="Description" rows="4" class="form-control" placeholder="Отбор от северозападна България и т.н..."></textarea>
                      <span asp-validation-for="Description" class="small text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="Address"></label>
-                    <input asp-for="Address" class="form-control" placeholder="www.abv.bg...,">
+                    <input asp-for="Address" class="form-control" placeholder="ул.Иван Вазов 5 и т.н...">
                      <span asp-validation-for="Address" class="small text-danger"></span>
                 </div>
 
@@ -88,10 +88,10 @@
             <div class="form-group">
                     <label asp-for="PlayerId"></label>
     <select asp-for="PlayerId" class="form-control"> 
-                    @foreach (var player in Model.Players)
-                    {
-              <option value="@player.Id">@player.FirstName @player.LastName @player.Name</option>
-                    }
+                        @foreach (var player in Model.Players)
+                        {
+                  <option value="@player.Id">@player.FirstName @player.LastName @player.Name</option>
+                        }
     </select>
     <span asp-validation-for="PlayerId" class="small text-danger"></span>
  </div>

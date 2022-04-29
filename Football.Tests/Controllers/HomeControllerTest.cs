@@ -92,7 +92,7 @@
         }
 
         [Fact]
-        public void IndexShouldReturnViewWithCorrectModelAndData()
+        public void IndexShouldReturnViewWithCorrectTeamAndData()
             => MyMvc
                 .Pipeline()
                 .ShouldMap("/")
@@ -118,7 +118,7 @@
             => Enumerable.Range(0, 10).Select(i => new Team());
 
         [Fact]
-        public void IndexShouldReturnCorrectViewWithModel()
+        public void IndexShouldReturnCorrectViewWithName()
            => MyController<HomeController>
                .Instance(controller => controller
                    .WithData(TenPublicTeams))

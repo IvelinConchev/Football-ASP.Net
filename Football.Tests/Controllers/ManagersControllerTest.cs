@@ -1,12 +1,13 @@
 ﻿namespace Football.Tests.Controllers
 {
+    using System.Linq;
     using Football.Controllers;
     using Football.Core.Models.Teams;
     using Football.Infrastructure.Data.Models;
     using Football.Models.Managers;
     using MyTested.AspNetCore.Mvc;
-    using System.Linq;
     using Xunit;
+
     using static WebConstants;
     public class ManagersControllerTest
     {

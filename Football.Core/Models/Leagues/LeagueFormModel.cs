@@ -15,6 +15,7 @@
         [StringLength(LeagueNameMaxLength, MinimumLength = LeagueNameMinLength, ErrorMessage = "Minimum: {2}, Maximum: {1}")]
         public string Name { get; set; }
 
+        [Display(Name = "Снимка")]
         [Required]
         public IFormFile Image { get; set; }
 
@@ -25,6 +26,7 @@
             ErrorMessage = "The field Description must be a string with a minimum length of {2}.")]
         public string Description { get; set; }
 
+        [Display(Name = "Отбор")]
         public Guid TeamId { get; set; }
 
         public IEnumerable<LeagueTeamServiceModel> Teams { get; set; }

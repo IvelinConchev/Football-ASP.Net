@@ -10,7 +10,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title text-center">(№@player.ShirtNumber) @player.FirstName  @player.MiddleName @player.LastName отбор - @player.Team @player.PositionName (@player.Age г.)</h5>
                     <br />
-                    <a asp-controller="Players" asp-action="Details" asp-route-id=@player.Id  asp-route-information="@player.GetInformation()" class="btn btn-primary">Виж</a>
+                    <a asp-controller="Players" asp-action="Details" asp-route-id=@player.Id  asp-route-information="@player.GetInformation()" class="btn btn-primary">View</a>
                 @if (ViewBag.AllowPlayerEdit == true || User.IsAdmin())
                     {
                         <a asp-controller="Players" asp-action="Edit" asp-route-id="@player.Id" class="btn btn-warning">Edit</a>

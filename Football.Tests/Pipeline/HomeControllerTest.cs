@@ -1,12 +1,15 @@
-﻿using System;
+﻿using FluentAssertions;
+using Football.Controllers;
+using Football.Core.Services.Teams.Models;
+using MyTested.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Xunit;
+
+using static Football.Tests.Data.Teams;
 
 namespace Football.Tests.Pipeline
 {
-	public class HomeController
+    public class HomeControllerTest
 	{
         [Fact]
         public void IndexShouldReturnViewWithCorrectModelAndData()
@@ -15,11 +18,12 @@ namespace Football.Tests.Pipeline
                   .ShouldMap("/")
                   .To<HomeController>(c => c.Index())
                   .Which(controller => controller
-                      .WithData(TenPublicCars))
+                      .WithData(TenPublicTeams))
                   .ShouldReturn()
                   .View(view => view
-                      .WithModelOfType<List<LatestCarServiceModel>>()
+                      .WithModelOfType<List<LatestTeamServiceModel>>()
                       .Passing(m => m.Should().HaveCount(3)));
+
 
         [Fact]
         public void ErrorShouldReturnView()

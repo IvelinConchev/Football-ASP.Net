@@ -35,8 +35,8 @@
                 <td scope="col">
                     <a asp-area="" asp-controller="Players" asp-action="Delete" asp-route-id="@player.Id" class="btn btn-danger float-right ml-3">Delete</a>
                     <a asp-area="" asp-controller="Players" asp-action="Edit" asp-route-id="@player.Id" class="btn btn-warning float-right ml-3">Edit</a>
-                    <a asp-area="Admin" asp-controller="Players" asp-action="ChangeVisibility" asp-route-id="@player.Id" class="btn btn-info float-right ml-3">@(player.IsPublic ? "Скрий" : "Покажи")</a>
-                    <a asp-area="" asp-controller="Players" asp-action="Details" asp-route-id=@player.Id asp-route-information="@player.GetInformation()" class="btn btn-primary float-right ml-3">Виж</a>
+                    <a asp-area="Admin" asp-controller="Players" asp-action="ChangeVisibility" asp-route-id="@player.Id" class="btn btn-info float-right ml-3">@(player.IsPublic ? "Hide" : "Show")</a>
+                    <a asp-area="" asp-controller="Players" asp-action="Details" asp-route-id=@player.Id asp-route-information="@player.GetInformation()" class="btn btn-primary float-right ml-3">View</a>
                 </td>
             </tr>
         }
