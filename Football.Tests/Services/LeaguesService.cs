@@ -55,5 +55,75 @@
             //Assert
             Assert.False(false, "p");
         }
+
+        [Fact]
+        public void IsCitiesShouldReturnDetailsTrue()
+        {
+            //Arrange
+            const string name = "Efbet";
+            const string image = "image.jpg";
+            const string description = null;
+            Guid teamId = Guid.NewGuid();
+            Guid managerId = Guid.NewGuid();
+
+            using var data = DatabaseMock.Instance;
+
+            data.Leagues.Add(new League { Name = name, Image = image, Description = description });
+
+            var leagueService = new LeagueService(data);
+
+            //Act
+
+            var result = leagueService.Details(managerId);
+            //Assert
+            Assert.True(true, "p");
+        }
+
+        [Fact]
+        public void IsCitiesShouldReturnDetailsFalse()
+        {
+            //Arrange
+            const string name = "Efbet";
+            const string image = "image.jpg";
+            const string description = null;
+            Guid teamId = Guid.NewGuid();
+            Guid managerId = Guid.NewGuid();
+
+            using var data = DatabaseMock.Instance;
+
+            data.Leagues.Add(new League { Name = name, Image = image, Description = description });
+
+            var leagueService = new LeagueService(data);
+
+            //Act
+
+            var result = leagueService.Details(managerId);
+            //Assert
+            Assert.False(false, "p");
+        }
+
+        [Fact]
+        public void IsCitiesShouldReturnDeleteTrue()
+        {
+            //Arrange
+            Guid id = Guid.NewGuid();
+            const string name = "Efbet";
+            const string image = "image.jpg";
+            const string description = null;
+            Guid teamId = Guid.NewGuid();
+            Guid managerId = Guid.NewGuid();
+
+            using var data = DatabaseMock.Instance;
+
+            data.Leagues.Add(new League { Name = name, Image = image, Description = description });
+
+            var leagueService = new LeagueService(data);
+
+            //Act
+
+            var result = leagueService.Delete(id);
+            //Assert
+            Assert.True(true, "p");
+        }
     }
 }

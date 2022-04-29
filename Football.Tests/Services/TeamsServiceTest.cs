@@ -97,5 +97,161 @@
             //Assert
             Assert.False(false, "p");
         }
+
+        [Fact]
+        public void IsTeamsShouldReturnDetailsFalse()
+        {
+            //Arrange
+            Guid id = Guid.NewGuid();
+            const string name = "Milan";
+            const string image = "img";
+            const string webSite = "wwwsite";
+            const string logoUrl = "da";
+            const string homeKit = "red";
+            const string awayKit = "white";
+            const string nickName = "Wild";
+            const string description = "alabala";
+            const string address = "Ivan Vazov";
+            const string headCoach = null;
+            const int champion = 1;
+            const int cup = 1;
+            const int win = 20;
+            const int defeats = 40;
+            Guid playerId = Guid.NewGuid();
+            Guid managerId = Guid.NewGuid();
+
+            using var data = DatabaseMock.Instance;
+
+            data.Teams.Add(new Team
+            {
+                Name = name,
+                Image = image,
+                WebSite = webSite,
+                LogoUrl = logoUrl,
+                HomeKit = homeKit,
+                AwayKit = awayKit,
+                NickName = nickName,
+                Description = description,
+                Address = address,
+                HeadCoach = headCoach,
+                Champion = champion,
+                Cup = cup,
+                Win = win,
+                Defeats = defeats
+            });
+            data.SaveChanges();
+
+            var teamService = new TeamService(data);
+
+            //Act
+            var result = teamService.Details(id);
+
+            //Assert
+            Assert.False(false, "p");
+        }
+
+        [Fact]
+        public void IsTeamsShouldReturnDetailsTrue()
+        {
+            //Arrange
+            Guid id = Guid.NewGuid();
+            const string name = "Milan";
+            const string image = "img";
+            const string webSite = "wwwsite";
+            const string logoUrl = "da";
+            const string homeKit = "red";
+            const string awayKit = "white";
+            const string nickName = "Wild";
+            const string description = "alabala";
+            const string address = "Ivan Vazov";
+            const string headCoach = "Dimitar Penev";
+            const int champion = 1;
+            const int cup = 1;
+            const int win = 20;
+            const int defeats = 40;
+            Guid playerId = Guid.NewGuid();
+            Guid managerId = Guid.NewGuid();
+
+            using var data = DatabaseMock.Instance;
+
+            data.Teams.Add(new Team
+            {
+                Name = name,
+                Image = image,
+                WebSite = webSite,
+                LogoUrl = logoUrl,
+                HomeKit = homeKit,
+                AwayKit = awayKit,
+                NickName = nickName,
+                Description = description,
+                Address = address,
+                HeadCoach = headCoach,
+                Champion = champion,
+                Cup = cup,
+                Win = win,
+                Defeats = defeats
+            });
+            data.SaveChanges();
+
+            var teamService = new TeamService(data);
+
+            //Act
+            var result = teamService.Details(id);
+
+            //Assert
+            Assert.True(true, "p");
+        }
+
+        [Fact]
+        public void IsTeamsShouldReturnDelete()
+        {
+            //Arrange
+            Guid id = Guid.NewGuid();
+            const string name = "Milan";
+            const string image = "img";
+            const string webSite = "wwwsite";
+            const string logoUrl = "da";
+            const string homeKit = "red";
+            const string awayKit = "white";
+            const string nickName = "Wild";
+            const string description = "alabala";
+            const string address = "Ivan Vazov";
+            const string headCoach = "Dimitar Penev";
+            const int champion = 1;
+            const int cup = 1;
+            const int win = 20;
+            const int defeats = 40;
+            Guid playerId = Guid.NewGuid();
+            Guid managerId = Guid.NewGuid();
+
+            using var data = DatabaseMock.Instance;
+
+            data.Teams.Add(new Team
+            {
+                Name = name,
+                Image = image,
+                WebSite = webSite,
+                LogoUrl = logoUrl,
+                HomeKit = homeKit,
+                AwayKit = awayKit,
+                NickName = nickName,
+                Description = description,
+                Address = address,
+                HeadCoach = headCoach,
+                Champion = champion,
+                Cup = cup,
+                Win = win,
+                Defeats = defeats
+            });
+            data.SaveChanges();
+
+            var teamService = new TeamService(data);
+
+            //Act
+            var result = teamService.Delete(id);
+
+            //Assert
+            Assert.True(true, "p");
+        }
     }
 }

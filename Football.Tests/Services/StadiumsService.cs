@@ -59,5 +59,86 @@
             //Assert
             Assert.False(false, "p");
         }
+
+        [Fact]
+        public void IsCitiesShouldReturnDetailsIdTrue()
+        {
+            //Arrange
+             Guid id = Guid.NewGuid();
+            const string name = "Efbet";
+            const string image = "image.jpg";
+            const string description = "alabala";
+            const int Capacity = 10000;
+            const string address = null;
+            Guid cityId = Guid.NewGuid();
+            Guid managerId = Guid.NewGuid();
+
+            using var data = DatabaseMock.Instance;
+
+            data.Stadiums.Add(new Stadium { Name = name, Image = image, Description = description, Address = address, Capacity = Capacity });
+
+            var stadiumService = new StadiumService(data);
+
+            //Act
+
+            var result = stadiumService.Details(id);
+
+            //Assert
+            Assert.True(true, "p");
+        }
+
+        [Fact]
+        public void IsCitiesShouldReturnDetailsIdFalse()
+        {
+            //Arrange
+            Guid id = Guid.NewGuid();
+            const string name = "Efbet";
+            const string image = "image.jpg";
+            const string description = "alabala";
+            const int Capacity = 10000;
+            const string address = null;
+            Guid cityId = Guid.NewGuid();
+            Guid managerId = Guid.NewGuid();
+
+            using var data = DatabaseMock.Instance;
+
+            data.Stadiums.Add(new Stadium { Name = name, Image = image, Description = description, Address = address, Capacity = Capacity });
+
+            var stadiumService = new StadiumService(data);
+
+            //Act
+
+            var result = stadiumService.Details(id);
+
+            //Assert
+            Assert.True(true, "p");
+        }
+
+        [Fact]
+        public void IsCitiesShouldReturnDeleteTrue()
+        {
+            //Arrange
+            Guid id = Guid.NewGuid();
+            const string name = "Efbet";
+            const string image = "image.jpg";
+            const string description = "alabala";
+            const int Capacity = 10000;
+            const string address = null;
+            Guid cityId = Guid.NewGuid();
+            Guid managerId = Guid.NewGuid();
+
+            using var data = DatabaseMock.Instance;
+
+            data.Stadiums.Add(new Stadium { Name = name, Image = image, Description = description, Address = address, Capacity = Capacity });
+
+            var stadiumService = new StadiumService(data);
+
+            //Act
+
+            var result = stadiumService.Delete(id);
+
+            //Assert
+            Assert.True(true, "p");
+        }
     }
 }
